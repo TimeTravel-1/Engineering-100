@@ -1,0 +1,1191 @@
+\documentclass[11pt]{article}
+
+%%%%%%%%%%%%%% LATEX SAMPLE FILE %%%%%%%%%%%%%%%%
+% A line which starts with a % sign
+% is called a COMMENT. It is IGNORED
+% by the LaTeX processor.
+
+% Include math
+\usepackage{amsmath,amsthm,amssymb}
+% Include links
+\usepackage{hyperref}
+
+
+%%%%%%%%%%%%%  THEOREMS  %%%%%%%%%%%%%%%%%
+% Let's define some theorem environments
+% To use later in the paper
+\theoremstyle{plain} % other options: definition, remark
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+% By including [theorem], the lemma follows the numbering of theorem
+% e.g. Thm 1, Lemma 2, Thm 3, Thm 4, \dots
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition} % the star prevents numbering
+
+\theoremstyle{example}
+\newtheorem*{example}{Example}
+% Remarks
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\DeclareMathOperator{\sinc}{sinc}
+
+
+%%%%%%%%%%%%%%  PAGE SETUP %%%%%%%%%%%%%%%%%
+% LaTeX has big default margins
+% The following sets them to 1in
+\usepackage[margin=1.5in]{geometry}
+
+% The following sets up some headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Behaviour of Liquids, Gases and Solids} % Left Header
+\rhead{\thepage} % Right Header
+\cfoot{} % Center Foot (empty)
+
+
+
+
+
+
+%%%%%%%%%%%%% SHORTCUTS %%%%%%%%%%%%%%%%%%%%
+% You can define your own shortcuts too.
+% Examples of custom commands
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+
+\begin{document}
+
+% Set up a title
+\title{ENGG 201}
+\author{David Ng}
+\date{Winter 2017}
+\maketitle
+
+% This line makes a ToC
+\tableofcontents
+
+% This line starts a new page
+\eject
+
+%%%%%%%%%%%%% January 11 %%%%%%%%%%%%%%%%%%%%
+
+\section{January 10, 2017}
+\subsection{Introduction}
+\begin{definition}
+\textbf{Engineering} is a tool to efficiently produce conditions or things that are different from the state in which they naturally exist. It is a link between science and humanity. 
+\end{definition}
+
+For this course, the states of matter concerned include liquid, solid, gas, and vapour. Matter can exist in one or more phases, depending on the conditions. Lowering the temperature of water below $0^{\circ}$ for instance, will turn it into ice. The properties of ice are thus different from those of water. For instance, its viscosity, density, conductivity, and strength are all affected. We note then, that conditions change the state of the material, which then affect the properties of the material. These properties affect engineering calculations. 
+
+We need quantitative ways to evaluate properties in each state. We use a variety of methods to accomplish this, including through measurement, prediction (\textbf{empirically}, based on previous measurements, or \textbf{theoretically}, based on fundamental understanding),  
+
+\section{January 12, 2017}
+\subsection{Scales of Magnitude}
+
+We can look at problems at multiple scales. For instance, we can look at bulk properties, such as pressure and temperature, or at the molecular level, such as the speed and mass of molecules. 
+
+\subsection{Fundamental and Derived Quantities}
+
+Some common fundamental quantities or dimensions include \textbf{mass}, \textbf{time}, and \textbf{length}. From these fundamental dimension, we can define many other quantities. For instance, velocity is equal to length divided by time. Other derived quantities include pressure, force, and energy. We also need additional fundamental quantities to define thermodynamic quantities. They are \textbf{temperature}, \textbf{current}, and \textbf{light intensity}. We note that any quantity $A$, can be expressed in terms of the fundamentals:
+$$[A] = f\left([m],[L],[t]\right),$$
+where the square brackets represent the dimensions of each respective quantity. In other words,
+$$[A] = [m]^{\alpha}[L]^{\beta}[t]^{\gamma}$$
+means that $A$ has dimensions so long as at least one of $\alpha$, $\beta$, $\gamma$ is not zero. If this is the case, then $A$ will have units. Furthermore, the magnitude of $A$ depends on how $m$, $L$, and $t$ are specified. For instance, if our unit of time is measured in seconds, this would affect the magnitude of $A$ compared to if time was measured in hours. 
+
+If $\alpha = \beta = \gamma = 0$, then we note that $[A]  = 1$, meaning that $A$ is \textbf{dimensionless}. To be dimensionless means that the quantity does not depend on how $m$, $L$, and $t$ are specified. For instance, the ratio of the length of a certain pen to the length of a certain table does not change regardless of the units we use to measure. 
+
+\begin{example}We can use the three basic dimensions to represent many quantities. Let us consider velocity, 
+$$u = \frac{l}{t},$$
+where $u$ is velocity, $l$ is length, and $t$ is time. The dimensions become,
+$$[u] = [l]^1[t]^{-1}.$$
+We now note that in this case, $\alpha = 0$, $\beta = 1$, and $\gamma = -1$. 
+\end{example}
+
+\begin{example}
+The dimensions of work (energy) can be expressed as 
+$$[W] = [F][L],$$
+where $W$ is work, $F$ is the force, and $l$ is the distance through which the force is exerted. However, $F$ is not a fundamental quantity, so we continue
+$$[F] = [m][a],$$
+where $m$ is mass and $a$ is acceleration. We further simplify acceleration into its fundamental quantities to obtain 
+$$[a] = \frac{[L]}{[t]^2}.$$
+We now substitute the values back into the expression for work to obtain 
+$$[W] = [m][L]^2[t]^{-2}.$$
+That is, $\alpha = 1$, $\beta = 2$, and $\gamma = -2$. Using the SI units for mass, length, and time, we obtain work in the units $kg\frac{m^2}{s^2}$. 
+\end{example}
+
+\begin{remark}
+In this class, we will use mass, length, time, temperature, and quantity (moles), expressed as 
+$[m]$, $[L]$, $[t]$, $[T]$, and $[n]$ respectively. 
+\end{remark}
+
+\textbf{Units} are the way dimensions are expressed. Some derived units are given special names. The SI units are \textbf{kilograms} ($kg$) for mass, \textbf{meters} ($m$) for length, \textbf{seconds} ($s$) for time, \textbf{Amperes} ($A$) for electric current, \textbf{Kelvins} ($K$) for temperature, \textbf{moles} ($mol$) for the amount of a substance, and \textbf{Candela} ($Cd$) for luminous intensity. 
+
+\begin{remark}
+All terms in an equation must have the same dimensions. 
+\end{remark}
+
+\subsection{Conservation Principles}
+
+We are concerned with the conservation of mass, energy, and momentum. We first formulate \textbf{Newton's Laws of Motion}:
+\begin{itemize}
+			\item A body at rest or in motion will remain in that state unless acted upon by a force (\textbf{Inertia Principle}). 
+			\item The acceleration obtained during displacement of a body is proportional to, and has the same direction as, the force performing the action and the proportionality constant is the inverse of the mass (\textbf{Action-Displacement}), 
+			$$F = ma.$$
+			\item The net force exerted by the surroundings on a body is equal in magnitude but opposite in direction to the applied for (\textbf{Action-Reaction}).
+		\end{itemize}
+		
+We now consider the conservation principles with these laws in mind:
+		
+\begin{enumerate}
+	\item  \textbf{Conservation of mass} states that in a confined volume (defined space), the rate of input plus the rate of generation equals the rate of output plus the rate of accumulation.  This equation is valid for the total mass, as well as for the individual species in the mixture. If there is no chemical reaction, then the generation term is 0. If the system is in \textbf{steady-state}, then the accumulation term is 0. For instance, in the case of incoming water from a tap, we can do a balance on water. In the case of incoming salt water from a tap, we can do a balance on water, on salt,  and on the total mass. We note that it is important to consider the extent of the control volume. 
+	\item \textbf{Conservation of energy} states that energy cannot be created or destroyed, but can be converted from one kind to another. The form of the equation is the same as that of conservation of mass. We make similar conclusions regarding control volume, steady state, and the presence of chemical reactions. 
+	\item \textbf{Conservation of momentum} states that
+	$$m_1\vec{v_1} + m_2\vec{v_2} = C,$$
+	where $C$ is a constant. 
+\end{enumerate}
+
+
+\section{January 17, 2017}
+\subsection{Intensive Variables}
+
+We make use of the following vocabulary:
+
+\begin{itemize}
+	\item  \textbf{Intensive properties} do not depend on the amount of mass and are size independent. For example, temperature, pressure, density, and specific volume are intensive properties. 
+	\item \textbf{Extensive properties} on the other hand, are size dependent. For example, volume and mass are extensive variables.
+	 \item \textbf{Phase} refers to a part of a system which is physically and chemically uniform. 
+
+	\item \textbf{Equilibrium} for a single phase, refers to uniformity of intensive properties. Equilibrium in two phases requires thermal equilibrium such that 
+	$$T_1=T_2,$$ mechanical equilibrium such that $$P_1 = P_2,$$ and chemical potential equilibrium where the escaping tendency of the first substance is equal to the escaping tendency of the second substance. 
+	\end{itemize}
+
+Systems in equilibrium must follow the \textbf{phase rule}, which states that 
+$$F = 2+C-P,$$
+where $F$ is the degrees of freedom (the number of intensive variables that can be set arbitrarily), $C$ is the number of components of pure components (usually one), and $P$ is the number of phases. Thus, when we have $P=1$, our degrees of freedom becomes $2$. With $2$ phases in the system, we are limited to $1$ degree of freedom. When our degrees of freedom become $0$, this means that we cannot choose the intensive properties. For example, the triple point of water refers to the fixed temperature and pressure at which all three states exist at the same time. 
+
+The \textbf{equation of state} claims that the dependent equations of the intensive variables (such as density) of a pure substance when it is in a single phase is given by
+$$\rho = f(T,P).$$
+
+\subsection{Phase Diagrams}
+
+A \textbf{pressure-termperature diagram} ($PT$ diagram) is a plot of pressure $P$ against temperature $T$ that shows the conditions at which the substance exists as a solid, liquid, or gas. These diagrams are usually generated experimentally. We can use an evacuated cylinder to contain the substance to be tested, then use a variable volume through a piston-cylinder arrangement, to vary $T$ and $P$. This allows us to determine the values at which each state exists. Given a pressure and temperature diagram, we can split the diagram into phase regions where each state is encountered. The $OA$ line represents solid and vapour, the $AC$ line represents liquid and vapour, the $AB$ line represents solid and liquid, the point $A$ represents the triple point, and the point $C$ represents the critical point. On a $PT$ diagram, an \textbf{isobar} is a line at a constant pressure, while an \textbf{isotherm} is a line at constant temperature. 
+
+\begin{remark}
+At a phase boundary, we encounter a change of state. We can describe the processes occurring at the phase boundaries as sublimation/deposition, melting/freezing, and vapourization/condensation. During this time, we are left with one less degree of freedom, since the substance has to convert from one phase to another entirely before it regains that degree of freedom. 
+\end{remark}
+
+As we move along line $AC$, temperature is increasing, as is pressure. During this time, the density of liquid decreases, while the temperature of vapour increases. At point $C$, we have $P_{liquid} = P_{vapour}$, so we have  one phase at the \textbf{critical point}.  Thus, $P_C$ is the critical pressure, while $T_C$ is the critical temperature. 
+We recall that along line $AC$, we have two phases. The \textbf{vapour-pressure} is the pressure along line $AC$ for a certain temperature. Therefore, vapour-pressure is a function of temperature, $$P^{vapour}  = f(T).$$
+
+\section{January 19, 2017}
+\subsection{Pressure Temperature Diagram} 
+
+The vapour-pressure line is the line along which there are two phases, either solid or liquid, along with vapour. The \textbf{boiling point} (also called the bubble point) are the points along the line at which liquid and vapour are present, whereas the \textbf{sublimation point} are the points along the line at which solid and vapour are present. We recall that for any specific temperature, we have one specific vapour pressure. Moreover, when pressure is 
+$$p^{vapour} = 1atm,$$
+we refer to the boiling or sublimation temperature as the \textbf{normal} boiling or sublimation temperature respectively. 
+
+\subsection{Pressure Volume Diagram}
+
+In a PV diagram, the triple point becomes a \textbf{triple line}. While the specific volume on this horizontal line is not kept constant, this line represents an isotherm and isobar, since the triple point maintains a specific temperature and pressure. The \textbf{system specific volume} indicates the specific volume of the two two-phase mixture. We now note that melting and the other processes now occur as a region in a PV diagram. In this conversion, the mass of the solid changes along with the mass of the liquid. The density of the solid and liquid does not change, but the density of the specific volume changes. That is, as we move along the triple line, the specific volume of the system changes as we convert between states of matter. 
+
+Note that if there is a break in the line, this indicates that the temperatures are not the same along the constant pressure, since the processes of melting/freezing and vapourization/condensation occur at different temperatures. While these processes occur at a fixed temperature, this temperature is different for melting/freezing and vapourization/condensation. It is only at the triple line which connects the volumes of solid, liquid, and vapour that we have the triple point which occurs over a constant temperature for all three states of matter. 
+
+In a PV diagram, $V$ is the specific volume, given by 
+$$V = \frac{m^3}{kg} = \frac{1}{\rho},$$
+where $\rho$ is density. There exists an isotherm curving from the top, which makes contact with the critical point at the top of the rounded curve indicating the region where liquid and vapour exist. A point on the line where solid and vapour exists on the PT diagram is represented on a PV diagram in the region where solid and vapour exists as a horizontal line. An isotherm on a PV diagram is represented as a horizontal line when two phases are present, and represented as a line with negative slope when only one phase is present. We note that isotherm lines never intersect one another, since there cannot be more than one temperature given the specific conditions. 
+
+\section{January 24, 2017}
+\subsection{Phase Rule}
+
+We recall that the phase rule is given by $$F + P = C +2.$$
+ $C$ in a non-reactive reaction refers to the individual substances, whereas $C$ in a reactive system refers to the atomic composition. In this class, we generally assume that there is no reaction. Phases represented by $P$ in the equation are realized by physical boundaries, with the composition being the same throughout the phase. Therefore, we can only ever have 1 phase of gas, since gases mix at equilibrium. For liquids, we may have more than 1 phase, since liquids may separate and create distinct layers in equilibrium. $F$ representing degrees of freedom indicates the number of intensive variables we may set. 
+ 
+ We first consider $C=1$ and $C=2$ systems, where we can consider PT and PV diagrams. The critical point on a PT diagram denotes the critical temperature, where any temperature greater than this would result in a gas. We note then the difference between a vapour and a gas is that when we increase the pressure of a gas at a fixed temperature, it does not change into a liquid. We realize that for a vapour, we can increase the temperature at a fixed temperature to obtain a liquid. 
+
+In a PV diagram, a constant $P$ means we are permitted to move horizontally, a constant $V$ means we are permitted to move vertically, and a common $T$ means we are permitted to move along the isotherms. For a given point in the region with liquid and vapour, there is a specific volume $V_m$, which varies between the specific volume of the liquid and vapour for that temperature, $V_L$ and $V_V$. $V_m$ therefore varies and approaches either $V_L$ or $V_V$ depending on its proportion of vapour or liquid. We therefore note that we have a constant temperature $T_1$ and constant pressure $P_1$ for all mixtures of liquid and vapour. The \textbf{bubble point} is the point for a specific temperature when vapour starts to appear when increasing specific volume, and the \textbf{dew point} is the point for a specific temperature when liquid starts to appear when decreasing specific volume. 
+
+\subsection{Lever Rule}
+
+On a PV diagram, we can draw the isotherm between the dew and bubble points. The \textbf{lever rule} can be used to find the relative amounts of phases. Let $V_L$ be the specific volume of liquid, $V_V$ be the specific volume of vapour, $V_m$ be the specific volume of the mixture, $x$ be the mass of the vapour, $1$ be the total mass, and $1-x$ be the mass of the liquid. We note that 
+$$\text{Total Volume = Volume of Liquid + Volume of Vapour}.$$
+Since the total mass is defined to be $1$, we multiply this by the specific volume to obtain the volume of each component, to obtain 
+\begin{align*}
+V_m(1) &= V_L(1-x) +V_Vx\\
+V_m &= V_L-xV_L+xV_V\\
+V_m-V_L &= x(V_V-V_L)
+\end{align*}
+After manipulating the equation, we obtain
+$$\frac{x}{1} = \frac{V_m-V_L}{V_V-V_L} = \frac{\text{mass of vapour}}{\text{total mass}}.$$
+We can similarly define the result for other ratios,
+$$\frac{V_V-V_m}{V_V-V_L} = \frac{\text{mass of liquid}}{\text{total mass}},$$
+$$\frac{V_m-V_L}{V_V-V_m} = \frac{\text{mass of vapour}}{\text{mass of liquid}}.$$
+
+\begin{remark}
+The lever rule can be applied to the three regions in a PV diagram with two phases. When asked for the specific volume of the vapour or liquid, we simply read the value off of the diagram of $V_V$ or $V_L$. When asked for the relative amount of vapour or liquid, then we need to determine the ratios. 
+\end{remark}
+
+\subsection{Composition}
+\textbf{Composition} is the proportion of the various constituents of a mixture, and results when $C>1$. We can represent these by the following methods:
+\begin{itemize}
+	\item \textbf{Mass fraction} of a component $j$ is defined as 
+	$$w_j = \frac{m_j}{\sum m_i},$$
+	where $m_i$ is the mass of the component $i$.
+	\item \textbf{Mole fraction} of a component $j$ is defined as 
+	$$x_j = \frac{n_j}{\sum n_i},$$
+	where $n_i$ is the moles of component $i$.
+	\item \textbf{Volume fraction} of a component $j$ is defined as 
+	$$v_j = \frac{v_j}{\sum v_i},$$
+	where $v_i$ is the volume of component $i$.
+\end{itemize}
+
+\begin{remark}
+We can only specify $C-1$ mole or mass fractions given the number of components in the mixture is $C$. 
+\end{remark}
+
+\section{January 26, 2017}
+
+\subsection{Two Component Vapour-Liquid Systems}
+
+According to the phase rule, we have for a system with two independent components, 
+$$F = 4-P.$$
+Thus, with 1 phase, we can specify 3 degrees of freedom. If we have 2 phases, we can specify 2 degrees of freedom, and if we have 3 phases, then we can specify 1 degree of freedom. To study these systems, we fix one intensive variable to study the effect of changing the others. Usually, we fix pressure to study temperature and the mole fraction $x_i$. We can use vapour-liquid and liquid-solid diagrams to accomplish this. 
+
+For \textbf{Vapour-liquid systems}, the vapour phase will always be homogenous. That is, we will only see one vapour phase. For liquids, we have 3 different cases:
+\begin{enumerate}
+	\item The liquids are \textbf{completely miscible}. 
+	\item The liquids are \textbf{completely immiscible}. 
+	\item The liquids are \textbf{partially miscible}. 
+\end{enumerate}
+
+\subsubsection{Miscible Systems}
+
+Consider the completely miscible liquids of acetone and ethanol at a pressure of $1atm$. On a graph of $T$ and $x_{ethanol}$, we note that the mole fraction on the x axis indicates increasing percentage of ethanol compared to acetone. The graph appears as a diagonal ellipse with a positive slope. The lower curve is the bubble point curve, and the upper curve is the dew point curve. We can determine the boiling points of each substance by looking at the leftmost and rightmost intersection between vapour and liquid. Since these boiling points occur at $1atm$, this is referred to as the \textbf{normal boiling point}. 
+
+At a certain point in the region where both phases exist, we draw a horizontal line until the line reaches the bubble point curve and dew point curves. We then read the mole composition at these two points to determine the mole fraction of the liquids in the liquid and vapour phases respectively. That is, in two phase regions, the composition of each phase can be read from the dew and bubble point curves. Therefore, we can consider at a particular temperature $T$ the following mole ratios of 
+$x_{vapour}$, $x_{mix}$, and $x_{liquid}$, which can be found by reading the horizontal intercept with the dew point curve, obtaining the value itself, and reading the horizontal intercept with the bubble point curve. At $T$, if $x < x_{vapour}$, then the substance is entirely vapour. If $x > x_{liquid}$, then the substance is entirely liquid. Only when $x$ is between the two values are two phases present, at which point we need to use the lever rule to determine the relative amounts of phases in the two phase region.
+
+Suppose we let $n_m$ be the number of moles of the mixture, $n_V$ be the number of moles of the vapour, and $n_L$ be the number of moles of the liquid. Thus,
+$$n_m = n_V + n_L.$$  
+$$n_mx_m = n_Vx_V + n_Lx_L.$$
+On our diagram, we can obtain all the mole fractions. We can then solve the equations to get the amount of phases:
+$$\frac{n_V}{n_m} = \frac{x_L-x_m}{x_L-x_V},$$
+$$\frac{n_L}{n_m} = \frac{x_m-x_V}{x_L-x_V}.$$
+
+\subsubsection{Miscible Systems with Azeotrope}
+An \textbf{azeotrope} refers to the point on a Tx diagram for a mixture where the vapour and liquid have the same composition at equilibrium. That is, on a Tx diagram, the dew point curve and bubble point curves touch at another point other than at the ends (the azeotrope). This is the case with benzene and ethanol at $1atm$. We use the lever rule in both two-phase regions to calculate the amounts of the phases.
+\begin{remark}
+The azeotrope boiling point may be at a greater or lower temperature than either substance alone. These are referred to as \textbf{minimum boiling azeotrope} and \textbf{maximum boiling azeotrope} respectively, since the mixture boils at a greater or lower temperature than either substance. \end{remark}
+
+\subsubsection{Immiscible Systems}
+We can similarly draw a Tx diagram for immiscible systems. This means that we plot the mole fraction for liquid $1$, and not liquid $2$. The vapour phase exists at the top, the vapour along with the second liquid are in the left region, the vapour along with the first liquid are in the right region, and both liquids are in the bottom region. We can once again determine the composition of each liquid by the mole fraction on the x axis, from $0$ to $1$. That is, the leftmost vertical line indicates only one substance is present, and the rightmost vertical line indicates only the other substance is present. The graph looks like a horizontal line with two concave down curves above, touching at a single point. The boiling points for each substance occur at the topmost intersection of the curves with the vertical end lines. The horizontal line is the \textbf{three phase line}. Applying the lever rule, we can perform this on the regions $V+L_2$, $L_1+L_2$, and $V + L_1$. 
+
+\subsubsection{Partially Miscible Systems}
+An example would be the mixture of isobutyl alcohol with water at $1atm$. The Tx diagram is split into 6 regions, starting with vapour on top, followed by vapour with liquid $1$, liquid $1$, both liquids, liquid $2$, and vapour with liquid $2$. Since these liquids are partially miscible, the $L_1$ and $L_2$ regions indicate that the mixture is rich in mainly one kind of liquid. The three phase line is once again the horizontal line that appears on the graph. The lever rule can be applied in all three regions with $V+ L_1$, $V+L_2$, and $L_1+L_2$. 
+
+\section{February 2, 2017}
+\subsection{Two Component Liquid-Solid Systems}
+
+For Liquid-Solid systems, they behave in a similar way to VL systems. We have 3 different cases:
+\begin{enumerate}
+	\item The solids are \textbf{completely miscible}.
+	\item The solids are \textbf{completely immiscible}.
+	\item The solids are \textbf{partially miscible}.
+\end{enumerate}
+
+\subsubsection{Miscible Systems}
+	
+	The Tx diagram for a completely miscible system takes the same form as for a vapour-liquid system. We now have a liquidus line and a solidus line. 
+
+
+\subsubsection{Immiscible Systems}
+We can consider the benzene-napthalene mixture at a pressure of $1atm$. The diagram takes the form of the diagram from vapour and iiquids. However, since there is never a mixture of the two types of solids, we have two distinct solids. That is, for a plot of mole fraction of napthatlene, goes clorckwise from the top we encounter the liquid, liquid and solid napthalene, both solids, and liquid and solid benzene. The point $E$ where the curves all meet is known as the \textbf{eutectic point}, and is the mixture with the lowest freezing point. We note that the freezing point of the eutectic mixture is lower than the freezing point of the pure components. Suppose we start with pure benzene as a solvent. When we add naphthalene as a solute, the freezing point of the mixture lowers to the eutectic point before increasing. \textbf{Freezing point depression}  is the process in which adding a solute to a solvent decreases the freezing point of the solvent. An example would be adding salt on roads to lower the freezing temperature of water. We note that the three phase line exists, where $S_A$ and $S_B$ are the solid benzene and napthalene respectively. At the eutectic point, $S_A$ and $S_B$ are composed entirely of their respective solids ($100\%$), while the liquid is composed of a portion of each solid. 
+
+\subsubsection{Partially Miscible Systems}
+
+Suppose we have a silver-copper system, plotting the mole fraction of copper. The shape of the diagram is the same as its vapour-liquid counterpart. Going clockwise from the top, we have $L$, $L+S_{\alpha}$, $S_{\alpha}$, $S_{\alpha}+S_{\beta}$, $S_{\beta}$, and $L + S_{\beta}$, where $S_{\alpha}$ is primarily copper and $S_{\beta}$ is primarily silver. We note that solid copper and solid silver exist only when their composition is $100\%$. The melting point of silver and copper are on the leftmost and rightmost lines respectively. We also have the maximum solubility temperature of copper and silver at the eutectic temperature on the left and right respectively. That is, the most $X$ one can add to $Y$ and have the same single phase as what one started with is referred to as the maximum solubility of $X$ in $Y$. Therefore, the maximum solubility of copper in silver is on the left, while the maximum solubility of silver in copper is on the right. There are also solubility points at a lower temperature which are usually given. 
+
+
+\section{February 7, 2017}
+\subsection{Ideal Gases}
+
+Our goal is to establish a PVT relationship. While pressure and temperature are relatively easy to measure, specific volume is more difficult to measure. We generally use P and T to find V from $$Pv = nRT.$$
+
+The \textbf{ideal gas law} does not apply to high pressure vapours or liquids. We use the ideal gas law to understand the bulk properties of the gas. An \textbf{ideal gas} is an imaginary gas that always obeys simple rules:
+\begin{itemize}
+	\item An ideal gas has mass, but the molecules are assumed to have zero volume.
+	\item The molecules are assumed to not exert any forces on neighbour molecules. That is, there is no attractive or repulsive forces.
+	\item The molecules must be very far apart. 
+	\item Substances that behave as an ideal gas are usually at low pressure and high temperature. 
+\end{itemize}
+
+When $P<<P_C$ and $T>>T_C$, where $P_C$ and $T_C$ indicate the critical pressure and temperature respectively, it can be assumed that we are dealing with an ideal gas. Light gases such as $O_2, N_2, He$, and $H_2$ at normal temperature and pressure behave like an ideal gas. The \textbf{equation of state} for an ideal gas is the relationship between PVT. We obtain a PVT relationship from experimental observations.
+\begin{remark}
+We can relate $V$, the specific volume, $V_m$, the molar volume, and $v$, the volume of a gas by converting between them. We are generally given specific volume. 
+\end{remark}
+ \textbf{Boyle's law} describes systems at a constant temperature. He found that pressure is inversely proportional to volume, 
+$$P \propto \frac{1}{v}.$$
+That is, at any one temperature (isotherm), $Pv$ is constant. On a Pv diagram, temperature is fixed along inverse lines since $$P_1v_1 = P_2v_2 = ...=P_nv_n =C.$$
+
+\textbf{Charles' Law} describes systems at a constant pressure (isobar). He found that volume is directly proportional to temperature,
+$$v \propto T.$$
+On a vT diagram, the lines of pressure are indicated by a constant $\frac{v}{T}$, since $$\frac{v_1}{T_1} = \frac{v_2}{T_2} = ...=\frac{v_n}{T_n} = C.$$
+Note that as $T \rightarrow 0$, $v \rightarrow 0$. At $0K$, an ideal gas should occupy zero volume. 
+
+\subsection{Ideal Gas EOS}
+
+Let us take a fixed mass of ideal gas at $P$, $T$, and $v$. This gas will go through heating/cooling and compression/expansion to $P_2$, $T_2$, and $v_2$. To analyze these variables, we consider a PT diagram. By applying Charle's and Boyle's laws, we find that we can solve for an unknown volume given that one of the other variables is fixed. It is important to note that by applying both of these laws, we find that 
+$$\frac{Pv}{T} = C.$$
+The constant above depends on the mass of the gas and the nature of the gas. We make use of \textbf{Avogadro's law} to note that equal numbers of different ideal gases occupy the same volume at a given pressure and temperature. $1kmol = 6.023\cdot 10^{26}$ molecules. That is, if we start with $1kmol$ of gas, then $v$ will be $V_m$, so we obtain 
+$$\frac{PV_m}{T} = R,$$
+where $R$ is the universal gas constant. In other words, 
+$$PV_m  = RT.$$
+Since $V_m = \frac{v}{n}$, this can also be expressed as 
+$$Pv = nRT,$$
+where $P$ is the pressure in $kPa$, $V_m$ is the molar volume in $m^3/kmol$, and $T$ is temperature in $K$. 
+
+\subsection{Universal Gas Constant}
+All gases approach ideal gas behaviour at low pressures. If we plotted $Pv$ to $P$, we will find that different gases converge to the same $Pv$ value as $P$ decreases. That is,
+$$\lim_{P \to 0}\left(\frac{Pv}{nT}\right) = R.$$
+If we have $1kmol$ of gas at $0^{\circ}C = 273.15K$, and $1atm = 101.325kPa$, it will occupy $22.414m^3$. We can use this to find that 
+$$R = 8.314\frac{kPa\cdot m^3}{kmol\cdot K}.$$
+
+In reality, we generally have more than one component in a mixture of ideal gases. A mixture containing ideal gases will behave like an ideal gas with $n_T$ total moles of $c$ components. 
+We utilize the two main laws which deal with additive pressure and additive volume.
+
+\textbf{Dalton's law} states that the pressure in the mixture is equal to the sum of the pressures that would be exerted individually in the same volume. That is, for pressures $P_A$, $P_B$ and $P$ with the same volume, we have 
+$$P_A + P_B = P,$$
+$$n_A + n_B = n_T.$$
+Making use of the above, we note that the total pressure in the mixture in equal to the sum of the partial pressure of the individual components, so
+$$P = \frac{n_ART}{v}+\frac{n_BRT}{v}.$$
+We can calculate the mole fraction $y_i$ of $A$ and $B$. Note that $\overline{P_i}$ is the partial pressure of component $i$, while $P$ is the total pressure. We have the following relations
+$$\overline{P_i} = y_iP,$$
+$$\sum \overline{P_i} = P,$$
+$$\sum y_i = 1.0.$$
+
+\textbf{Amagat's law} states that the individual volumes within an ideal gas mixture sum to the total volume. We note the following relations,
+
+$$v_i = y_iv,$$
+$$ \sum v_i =v,$$
+$$\sum y_i = 1.0.$$
+
+\section{February 9, 2017}
+\subsection{Ideal Gas Examples}
+
+\begin{example}
+Suppose we have a $0.25m^3$ tank and a gas mixture comprised of $CO_2$ and methane. $50\%$ of each on the molar basis fills the tank. At a pressure of $0.70mPa$ at a temperature of $48^{\circ}C$. We add $1kg$ of oxygen to the mixture while maintaining the temperature. In the final mixture, find the mole fractions, determine the pressure, and then find the final molar mass of the mixture.
+\end{example}
+
+We start off by considering the tank where $v = 0.25m^3$. Termperature is $48^{\circ}C = 321.15K$. The pressure expressed in $kPa$ is $700kPa$. This contains $CO_2$ and $CH_4$ molecules. The mole fraction of both are equal. We now add $1kg$ of oxygen. The volume of the container does not change, not does the temperature. Furthermore, the moles of $CO_2$ and $CH_4$ do not change after the addition of oxygen. The only variables that change are the contents of the tank (since we added $1kg$ of $O_2$), and the pressure inside. Before the addition of oxygen, we note that we can solve $$n = \frac{Pv}{RT}$$
+to determine the total number of moles. This is $0.06554kmol$ in total. Dividing this by 2 gives the number of $kmol$ of $CO_2$ and $CH_4$. Thus, we know the number of $kmol$ of $CO_2$ and $CH_4$ after the addition of $O_2$, since the number of moles does not change. Converting using the molar mass of oxygen, we find that there are $0.03125kmol$ of $O_2$. Since we now have all the moles of each component, we find that the mole fractions are $y_{CO_2} = y_{CH_4} = 0.338$ and $y_{O_2} = 0.324$. 
+\newline To find the pressure, we isolate to find $$P = \frac{nRT}{v},$$
+where $n$ is the total number of moles. The resulting pressure is $P = 1034 kPa$. 
+\newline To find the molar mass, we recall that 
+$$\overline{M} = \sum y_iM_i,$$
+where $y_i$ is the mole fraction. Thus, we can multiply each mole fraction with the respective molar mass of the component to find that the average mass is $\overline{M} = (.338(44.1+16.09) + .324\cdot 32)kg/kmol = 30.66kg/mol$. 
+
+\subsection{Kinetic Theory}
+
+There are two methods for studying the behaviour of ideal gases. The first is the Ideal Gas Law, which was based on experiments. The second method is \textbf{Kinetic Theory} and is based on theory. The need for kinetic theory arises due to the need in engineering to evaluate parameters such as viscosity, conductivity, and other properties of gases that are not covered by the Ideal Gas Law. We assume the following:
+\begin{itemize}
+	\item The volume of the molecules are small in comparison to the volume of the gas. 
+	\item Molecules are inert rigid spheres with no intermolecular forces. 
+	\item Molecules move freely in all directions, so elastic collisions will take place (kinetic energy and momentum are conserved). 
+\end{itemize}
+	
+\subsubsection{Relationship for Pressure of a Gas}
+	We look at the number, mass, and velocity of the molecules in the gas in order to arrive at a pressure. We start with a single molecule of an ideal gas in a cube shaped container with side length $a$. Let $c$ denote the speed of the molecule contained. We note that we can split this up into components,
+	$$\vec{c} = u\hat{i} + v\hat{j} + w\hat{k}.$$We can also relate speed by 
+	$$c^2 = u^2+v^2+w^2.$$
+	When the molecule travels with speed $c$, it collides with the walls, but the speed does not change. Note that momentum is given as $mc$, so the change in momentum for one collision is 
+	$$\Delta m = 2mc.$$
+The change in momentum for one molecule per unit time is given as 
+$$\frac{\Delta m}{t} = 2mc\left(\frac{c}{a}\right)= \frac{2mc^2}{a},$$
+where $c/a$ is speed divided by distance, giving $1/t$. Now, we consider $N$ molecules within the container. The combined change in momentum for all $N$ molecules per unit time is therefore given as 
+$$\frac{2m}{a}\left(c_1^2 + c_2^2 + ...+c_N^2\right).$$	
+	
+\begin{definition}
+\textbf{Mean squared velocity} is defined as 
+$$\overline{c^2} = \frac{c_1^2 + c_2^2 + ...+c_N^2}{N}.$$
+\end{definition}
+	
+Using this, we can rewrite the change in momentum for all molecules per unit time. Since force is the rate of change of momentum over time, this gives us
+$$F = \frac{2mN\overline{c^2}}{a}.$$
+Since pressure is the force divided by the total surface area, we note that the surface area within the cube of side length $a$ is $6a^2$, so pressure is 
+$$P = \frac{mN\overline{c^2}}{3a^3} = \frac{mN\overline{c^2}}{3v}. $$
+where $P$ is the total pressure, $m$ is the mass of one molecule, $N$ is the total number of molecules, $\overline{c^2}$ is the mean squared velocity, and $v$ is the total volume.
+
+\begin{remark}
+The \textbf{root mean squared velocity} is the square root of the mean squared velocity.
+\end{remark}
+	
+We need to check that our equation for pressure is consistent with those found in experiments. We need one more piece of information, the average kinetic energy which is given as,
+$$\overline{E_k} = \frac{1}{2}m\overline{c^2}.$$
+Maxwell stated that the kinetic energy $E_k$ is constant at a constant temperature $T$. We can now verify against Boyle's Law. Substituting our expression for pressure into Boyle's Law, we find that we need a constant $Pv$. Our expression becomes $$Pv = \frac{mN\overline{c^2}}{3}.$$ Since $\overline{E_k}$ is constant at a given temperature, this means that for a fixed mass, $\overline{c^2}$ is constant. Thus, in the expression for $Pv$, we note that for a fixed mass of a known gas, $N$ is a constant as well. 
+	
+We can also compare against Amagat's Law, which implies that when $P$, $v$, and $T$ are constant, then $n$ is constant. For two different gasses, let us assume that their pressures, volumes, and temperatures are constant. Since temperature is constant, their kinetic energies are the same. But then this means that their masses of the gas multiplied by their mean squared velocity is constant. Thus, in the expression for $P_1v_1=P_2v_2$, this requires that $N_1=N_2$, thus confirming Avogadro's Law. By conforming to these physical laws, there is evidence to support the validity of the theory.
+	
+\section{February 14, 2017}
+\subsection{Kinetic Energy and Temperature}
+	
+We can derive the pressure for one mole using the total pressure formula $Pv = \frac{1}{3}mN\overline{c^2}$ by replacing volume $v$ with molar volume $V_m$ and replacing the number of moles $N$ with Avogadro's constant $N_A = 6.022\cdot 10^{23}mol^{-1}$. Thus, the pressure for one mole is 
+$$PV_m = \frac{mN_A\overline{c^2}}{3}.$$ Similarly, the kinetic energy for one mole is 
+$$E_{k,m} = N_A\left(\frac{m\overline{c^2}}{2}\right).$$
+We can also derive another expression for kinetic energy. Equating the above two equations, we note that $PV_m = \frac{2}{3}E_{k,m}$. Since $PV_m = RT$, then 
+$$E_{k,m} = \frac{3}{2}RT.$$
+This is the total kinetic energy of one mole of ideal gas. 
+
+\subsection{Speed and Temperature}
+
+We note that from before, we know that $PV_m = RT$ and $PV_m = \frac{N_Am\overline{c^2}}{3}$. Additionally, $mN_A = M$, where $m$ is the mass, $N_A$ is Avogadro's constant, and $M$ is that molar mass. Equating all three equations, we find that $\frac{M\overline{c^2}}{3} = RT$, so 
+$$\overline{c^2} = \frac{3RT}{M}.$$
+We can also determine the \textbf{root mean square speed} (\textbf{rms speed}), which is 
+$$\sqrt{\overline{c^2}} = \sqrt{\frac{3RT}{M}}.$$
+To simplify formulas, we make use of the \textbf{Boltzmann Constant}
+$$k = \frac{R}{N_A} = 1.380662\cdot 10^{-23}\frac{J}{K},$$
+which is given by the gas constant per molecule. 
+	
+With regards to the distribution of molecular velocities, not all the molecules in an ideal gas will be going at the same speed. The fraction of molecules at a given speed $c$ will depend on the temperature. If we plotted a graph of the fraction of molecules and $c$, we will find that for $T_2> T_1$, the distribution the fraction of molecules at $T_2$ will on average have a higher $c$. The \textbf{most probable speed} occurs at the peak of this distribution, and is given as 
+$$c_{mp} = \sqrt{\frac{2RT}{M}}.$$
+In contrast, the \textbf{mean (average) speed} is 
+$$\overline{c} = \frac{1}{N}\sum_{i-1}^Nc_i = \frac{c_1 + c_2 + ... + c_N}{N} = \sqrt{\frac{8RT}{\pi M}}.$$
+A simple analysis of the units of the above equations for speed will reveal that we cannot simply use the regular expression for the gas constant in the formulas. Thus, for all of the formulas for speeds, we shall use 
+$$R = 8314 \frac{Pa\cdot m^3}{kmol \cdot K}.$$
+	
+\subsection{Heat Capacities}
+We recall that for one mole of gas, the kinetic energy is 
+$$E_{k,m} = \frac{3RT}{2},$$
+at a specific temperature $T$. If we increase the temperature to $T+1$, then we have $E_{k,m} = \frac{3}{2}R(T+1)$, so $\Delta E_{k,m} = \frac{3R}{2}$. 
+\textbf{Specific heat} is defined as the energy required to heat one mole of a substance by $1K$. There are two ways to accomplish this. The first method occurs at a constant volume, where the change in kinetic energy is equal to the energy added to the gas. There is no work by the gas, so $\Delta V = 0$. At a constant volume, the specific heat is 
+$$C_V = \frac{3R}{2}.$$
+The second method occurs at a constant pressure. Thus, the change in kinetic energy is equal to the energy added. The molar volume must change due to the temperature increase, as $PV_m = RT$. 
+This change in volume introduces a work term $P\Delta V$. We can find this by subtracting $PV_m=RT$ from $P(V_m+\Delta V) = R(T+1)$, which gives $P\Delta V = R$. Therefore, the specific heat at a constant pressure is 
+$$C_P = \frac{3}{2}R+R = \frac{5R}{2}.$$
+We note that we can easily obtain $C_V$ and $C_P$ by adding or subtracting $R$ from each other 
+\begin{remark}
+The \textbf{specific heat equation} can be obtained using $C_P$, since 
+$$Q = nC_p\Delta T.$$
+\end{remark}
+
+\subsection{Collisions Between Molecules}
+So far, we have only considered collisions with walls. However, molecules can collide with each other as well. We define the \textbf{mean free path} $\lambda$ as the average distance that a molecule travels between two successive collisions with another molecule. The \textbf{collision diameter} $\sigma$ is the distance between centers of two colliding molecules at which the repulsion force between them becomes large enough to cause a reversal of motion. Note that the distance between the center of two spheres of the same radius is equal to the diameter of both spheres. 
+
+To calculate mean free path, we start by assuming that only one molecule is moving so that the rest are stationary. Additionally, we assume that molecules travel in straight lines, and the volume swept by the movement is a cylinder. If the center of another molecule is within $\sigma$ from the center of the moving molecule, then they will collide. The cross sectional circular area that is affected therefore has a diameter of $2\sigma$, since molecules with centers within this total range will be hit. The volume of the swept cylinder is therefore $\pi \sigma^2L$. The \textbf{number density} $\rho_N$ is the number of molecules per unit of volume. The number of collisions for the moving molecule is therefore $\pi \sigma^2L\rho_N$. The mean free path of a single moving molecule can then be calculated by dividing the total distance travelled by the total number of collisions,
+$$\lambda = \frac{L}{\pi \sigma^2 L \rho_N} = \frac{1}{\pi \sigma^2\rho_N}.$$
+In the event that all of the molecules are moving, then the mean free path is
+$$\lambda = \frac{1}{\sqrt 2 \pi \sigma^2 \rho_N}.$$
+In the discussion above, we have made use of $\rho_N$. To find the number density, we make use of $PV_m = RT$ and the Boltzmann constant $k = \frac{R}{N_A}$. From equating these two equations, we obtain 
+$$\rho_N = \frac{N_A} {V_m} = \frac{P}{kT},$$
+where $\rho_N$ is the number density in molecules per unit volume, $N_A$ is Avogadro's constant, $V_m$ is the molar volume, $P$ is the pressure, $k$ is the Boltzmann constant, and $T$ is the temperature. We can therefore substitute this expression for number density to find that the man free path is 
+$$\lambda = \frac{kT}{\sqrt 2 \pi \sigma^2 P}.$$
+
+The distance between molecules can also be calculated. The \textbf{mean distance between molecules} $\delta$ can be calculated by first taking the inverse of number density to find the volume between molecules. The effective volume occupied by the molecules is given as 
+$$\delta^3 = \frac{1}{\rho_N} = \frac{kT}{P}.$$
+Thus, the mean distance between molecules is 
+$$\delta = \sqrt[3]{\frac{kT}{P}}.$$
+Generally, the magnitudes are $$\sigma < \delta < \lambda.$$
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\section{February 16, 2017}
+\subsection{Rate of Molecular Collisions With Walls of Container}
+
+If we multiply the total number of molecules with the number of collisions per molecule per unit time, we can divide this by area to obtain the rate of molecular collisions with the walls of the container. Therefore, the rate of perpendicular collisions is 
+$$\frac{\left(\rho_N a^3\right)\left(\frac{\overline{c}}{a}\right)}{6a^2} = \frac{\rho_N\overline{c}}{6}.$$ For real collisions that are not restricted to perpendicular interactions, we use the formula
+$$\frac{\rho_N \overline{c}}{4}.$$
+
+\subsection{Transport Properties}
+
+We consider the transport of mass through diffusion (diffusivity $D$), the transport of heat through conduction (thermal conductivity $\kappa$), and the transport of momentum (viscosity $\mu$). All transport equations have the same form, where flux is equal to the negative of a coefficient multiplied by a driving force. The driving force is the gradient, and flux is the transport of something over time and area. It is important that the area is perpendicular to the direction of the transport. The gradient is visualized as a triangle from high to low, on the y axis and transport from left to right. The vertical difference is the reason for movement, where the driving force can be understood as the hypotenuse of the triangle. 
+
+\subsection{Transport of Mass (Diffusion)}
+
+\textbf{Diffusion} is transport due to the random movement of molecules. \textbf{Fick's Law of Diffusion} states that 
+$$j_A = -D_{AB}\left(\frac{\mathrm d C_A}{\mathrm d y}\right),$$
+where $j_A$ is flux of $A$ measured in $\frac{mol}{m^2s}$, $D_{AB}$ is the diffusivity of $A$ in $B$ measured in $\frac{m^2}{s}$, $C_A$ is the concentration in $\frac{mol}{m^3}$ and $y$ is the distance in $m$. The concentration and distance are used to calculate the concentration gradient,
+$$\frac{\mathrm d C_A}{\mathrm d y} \approx\frac{\Delta C_A}{\Delta y} = \frac{C_{A_2}-C_{A_1}}{y},$$ which is measured in $\frac{mol}{m^4}$. The triangle drawn consists of distance $y$ on the bottom, and a triangle with $C_{A_1}$ at the top left and $C_{A_2}$ at the bottom right. Note that the flux is positive because as distance $y$ increases, flux (a positive number) is from the high to low concentration. Change in concentration is negative, so this cancels out the negative in the expression. Molecular diffusion is more prevalent in the gas phase than in liquids or solids. The diffusivity in the diffusion equation above is $$D_{AB} = \frac{\lambda \overline{c}}{2}\approx D_{AA},$$
+where $A$ and $B$ are similar molecules. 
+This is approximately equal to $D_{AA}$, which indicates the diffusivity of a substance in itself. The diffusivity of a substance within itself can be calculated by substituting the $\lambda$ and $\overline{c}$ to obtain 
+$$D_{AA} = \frac{RT}{PN_A\pi\sigma^2}\sqrt{\frac{RT}{\pi M}}$$
+The ratio of two diffusivity values obtained at different temperatures and pressures can be found, where 
+$$\frac{D_2}{D_1} = 	\frac{T_2^{\frac{3}{2}}}{P_2}\cdot \frac{P_1}{T_1^{\frac{3}{2}}} = \left(\frac{T_2}{T_1}\right)^{\frac{3}{2}}\frac{P_1}{P_2}.$$
+\subsection{Transport of Heat (Conduction)}
+	
+\textbf{Conduction} is transport of heat due to differences in temperature. The flux is given by $$q = -\kappa\left(\frac{\mathrm d T}{\mathrm d x}\right),$$
+where $q$ is the flux of heat in $\frac{J}{s\cdot m^2} = \frac{W}{m^2}$, $\kappa$ is the thermal conductivity measured in $\frac{W}{mK}$, $\frac{\mathrm d T}{\mathrm d x}$ is the temperature gradient in $\frac{K}{m}$. Since $$q = \frac{Q}{A},$$ where $Q$ is the rate of heat transfer measured in $J/s$ and $A$ is the area measured in $m^2$, \textbf{Fourier's Law of Thermal Conductivity} states that 
+$$Q = -\kappa A\frac{\mathrm d T}{\mathrm d x}.$$ The temperature and distance are used to calculate the temperature gradient,
+$$\frac{\mathrm d T}{\mathrm d x} \approx \frac{\Delta T}{\Delta x} = \frac{T_2-T_1}{x},$$ which is measured in $\frac{K}{m}$. The triangle drawn consists of flux of heat $q$ on the bottom, and a triangle with $T_1$ at the top left and $T_2$ at the bottom right. For an ideal gas, when a hot ($T_1$) molecule travels one mean free path ($\lambda$), it will hit a cooler molecule and transfer energy. The heat capacity of one molecule is $\frac{C_V}{N_A}$, while the rate of molecules crossing a plane is $\frac{\rho_N\overline{c}}{4}$. Thus, the thermal conductivity in the conduction equation is 
+$$\kappa = \frac{\lambda\rho_N\overline{c}}{2}\cdot \frac{C_V}{N_A} = \frac{C_V}{N_A\pi\sigma^2}\sqrt{\frac{RT}{\pi M}}.$$
+$\kappa$ is low for gases, since gases are poor conductors and good insulators. 
+	
+	
+\subsection{Transport of Momentum (Viscosity)}
+	
+\textbf{Viscosity} is an indication of the resistance of a fluid to deformation. A viscous fluid is moved with only some effort (energy). Thus, $\mu_{gas}$ is very low. Consider two plates $A$ and $B$ with a gas in between, where $B$ is fixed. We need to apply a force to the top plate $A$ to keep it moving. This creates a velocity gradient between the two plates. \textbf{Newton's Law of Viscosity} states that $$\frac{F}{A} = -\mu\left(\frac{\mathrm d u}{\mathrm d y}\right),$$
+where $\frac{F}{A}$ is the flux of momentum in $\frac{kg}{m\cdot s^2}$, $\mu$ is the viscosity measured in $\frac{kg}{ms}$, $\frac{\mathrm d u}{\mathrm d y}$ is the velocity gradient in $\frac{m/s}{m}$. Note that the units of $\mu$ are $\frac{kg}{ms}$ or $Pas$. For an ideal gas, the viscosity in the momentum equation is 
+$$\mu = \frac{\rho_N\overline{c}\lambda m}{2} = \frac{M}{N_A\pi\sigma^2}\sqrt{\frac{RT}{\pi M}}.$$
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\section{February 28, 2017}
+\subsection{Real Gases - Deviation From Ideal Behaviour}
+
+\textbf{Real gases} are gases that do not follow ideal behaviour. That is, real gases do not obey the ideal gas law:$$Pv = nRT.$$
+The ideal gas law is suitable only when the pressure $P$ is much less than the critical pressure $P_C$, and the temperature $T$ is much greater than the critical temperature $T_C$. Real gas laws apply in many real world engineering calculations, such as involving natural gas and pipelines. For example, if we plotted $\frac{PV_m}{RT}$ with $P$, the ideal line would be at $y=1.0$. Real gases would diverge from this horizontal line as $P$ increases on the x axis. 
+
+Reasons for non ideal behaviour include the diverse shape of molecules (not close to spherical), the existence of intermolecular forces (ideal gases assume there are no forces), there is actual volume of molecules (ideal gases assume there is zero volume), and electrical forces. We generally focus on intermolecular forces and the volume of molecules. These are more pronounced at high pressures and low temperatures. 
+	
+\begin{example}
+Suppose we are given a PV diagram of $CO_2$. Consider the $L+V$ region. At high temperatures where $T >> T_C \approx 800K$, the real behaviour is well approximated by the ideal gas law. For $T \approx 400K$ at a given volume, the predicted pressure differs due to the deviation between the real and ideal behaviour at lower temperatures.
+\end{example}
+	
+\subsection{The Van der Waals Equation of State}
+	
+This is the first of many equations of state that deal with the real behaviour of gases. These are all based on experiments, data, and theory regarding the actual behaviour of gases. Van der Waals picked two primary reasons for the observed non-ideal behaviour. That is, he took into account that 
+\begin{enumerate}
+	\item \textbf{Molecules have a finite size}. If molecules have a finite size and they occupy space, then for one mole of gas, then
+	$$P(V_m-b) = RT,$$
+	where $P$ is the pressure, $V_m$ is the volume of the container, and $b$ indicates that the available volume for movement is reduced (This is the volume taken up by gases). Experimentally, the value of this is 
+	$$b = 4N_Av_m,$$
+	where $N_A$ is Avogadro's constant and $v_m$ is the volume of one molecule. 
+	\item \textbf{There are intermolecular forces.} In the bulk gas, the net effect of intermolecular forces is zero. That is, forces act symmetrically on the molecule. However, if we are at or near the wall, a molecule has to overcome the attractive forces of its neighbors in order to hit the wall. This causes a reduction in the momentum of molecules striking the wall. This loss i n momentum results in a loss of pressure experienced by the wall. Thus, there is an error in the pressure of $\Delta P$. 
+\end{enumerate}
+According to these observation, the equation then becomes
+$$(P + \Delta P)(V_m-b) = RT,$$
+where $\Delta P \propto$ the number of molecules striking the wall and the number of molecules attracting other molecules. These are both in terms of molar density, so 
+$$\Delta P \propto \rho_m^2 \propto \frac{1}{V_m^2}.$$
+Replacing the proportionality with a constant $a$, The Van der Waals equation of state becomes
+$$\left(P+\frac{a}{V_m^2}\right)(V_m-b) = RT,$$
+where $a$ and $b$ change with different substances. These values can be calculated from the critical properties ($T_C and P_C$). This can be rearranged to solve for pressure and volume, 
+$$P = \frac{RT}{V_m-b}-\frac{a}{V_m^2},$$
+$$V_m^3-\left(b+\frac{RT}{P}\right)V_m^2+\frac{a}{P}V_m-\frac{ab}{P} = 0.$$
+For the second equation, we note that there could be either one real root or three real roots. With one root, $V_m$ refers the volume in the single phase region. With three real roots, the largest $V_m$ is the volume of vapour and the smallest $V_m$ is the volume for liquid in the two phase region. The middle value is ignored. We recall that $V_m = \frac{v}{n}$ since molar volume is the total volume divided by the number of moles. 
+	
+The constants $a$, $b$ can be obtained from tables. Alternatively, they can be found from the critical point. For $T<T_C$, there are 3 real roots, for $T>T_C$, there is one real root, and for $T = T_C$, there are three real roots with the same value. At the critical point, $V_m=V_C$. This can be rearranged into $V_m -V_C=0$. Thus,
+$$(V_m-V_C)^3=0$$
+also as three real root corresponding to the critical volume. Expanded, this becomes 
+$$V_m^3-3V_cV_m^2 + 3V_c^2V_m -V_c^3=0.$$
+At the critical point, $T = T_C$ and $P = P_C$, so 
+$$V_m^3-\left(b+\frac{RT_C}{P_C}\right)V_m^2+\frac{a}{P_C}V_m-\frac{ab}{P_C} = 0.$$
+Thus, since these must be the same, we compare corresponding terms in these two equations to solve for $a$ and $b$. Alternatively, the critical properties can be obtained given $a$ and $b$. Below are a summary of useful equations that result 
+ $$V_C = 3b,$$
+ $$P_C = \frac{a}{27b^2},$$
+ $$T_C = \frac{8a}{27Rb},$$
+$$a = \frac{27R^2T_C^2}{64P_C},$$
+$$b = \frac{RT_C}{8P_C}.$$
+The units of $b$ are $m^3/kmol$ while the units of $a$ are $kPa\left(\frac{m^3}{kmol}\right)^2$. Since critical pressure $P_C$ is usually given in $atm$, we need to use $R = 0.08205 \frac{atm\cdot m^3}{kmol\cdot K}$. Lastly, the \textbf{critical compressibility factor} is given by
+$$Z_C = \frac{P_CV_C}{RT_C} = \frac{3}{8}.$$
+That is, if the critical compressibility is near 0.375, then the Van der Waals EOS is a good approximation. 
+	
+\section{March 2, 2017}
+\subsection{The Van der Waals Equation of State Cont'd}
+
+When we have a phase change from vapour to liquid, the pressure remains constant while $V$ changes. The same holds true at the critical point. At the critical point, the parrtial derivative of pressure with rerspect to volume is 0, so 
+$$\left(\frac{\partial P}{\partial V}\right)_T = 0.$$
+However, we also obtain a saddle point, so 
+$$\left(\frac{\partial^2 P}{\partial V^2}\right)_T = 0.$$
+Thus, VdW EOS can be related by:
+$$\left(\frac{\partial P}{\partial V}\right)_T =-\frac{RT}{(V-b)^2}+\frac{2a}{V^3}=0.$$
+Thus, at the critical temperature and pressure, 
+	$$-\frac{RT_C}{(V_C-b)^2}+\frac{2a}{V_C^3}=0.$$
+	Applying the second derivative, we have 
+$$\left(\frac{\partial^2 P}{\partial V^2}\right)_T = \frac{2RT}{(V-b)^3}-\frac{6a}{V^4} = 0,$$
+so at the critical point, 
+$$\frac{2RT_C}{(V_C-b)^3}-\frac{6a}{V_C^4} = 0.$$
+Solving these two equations at the critical point with $$P_C = \frac{RT_C}{V_C-b}-\frac{a}{V_C^2},$$
+we find the exact same expressions for the critical pressure, volume, and temperature in terms of $a$ and $b$. 
+
+At the critical point, the distance between molecules are very different from gases at $P<<P_C$ and $T>> T_C$. Thus, 
+$$\delta \approx \lambda \approx 2 \sigma$$
+at $T_C$ and $P_C$. 
+	
+\subsection{Other Equations of State}
+
+These overcome some of the problems with VdW EOS. Two of the more common EOS are the \textbf{Peng Robinson} and \textbf{SRK (Soave-Redlich-Kuong)} EOS. These need $T_C$, $P_C$, and the accentricity $\omega$ that takes into account the shape of the molecule. We can define 
+$$\omega = -\log\left(\frac{P_V}{P_C}\right)-1,$$
+where $P_V$ is the vapour pressure at $T = .7T_C$. 
+
+SRK states that 
+$$P + \frac{RT}{V_m-b}-\frac{a\alpha}{(V_m(V_m+b))},$$
+$$\alpha = \left(1+\kappa\left(1+\sqrt{\frac{T}{T_C}}\right)\right)^2,$$ 
+$$\kappa = 0.480+1.574\omega-0.176\omega^2.$$
+	
+Peng Robinson states that
+$$P = \frac{RT}{V_m-b}-\frac{a\alpha}{V_m(V_m+b)+b(V_m-b)},$$
+$$\alpha = \left(1+\kappa\left(1+\sqrt{\frac{T}{T_C}}\right)\right)^2,$$ 
+$$\kappa = 0.37464+1.54226\omega-0.26992\omega^2.$$
+	
+\subsection{Compressibility Factor and Corresponding States}
+We recall that the compressibility factor is given as 
+$$Z = \frac{PV_m}{RT}.$$ For an ideal gas, $Z = 1.0$. Derivation of $Z$ from $1.0$ tells us the deviation from ideal behaviour. in general, $Z$ is a function of $T$ and $P$. For non-ideal gases, we have 
+$$P_1v_1 = nZ_1RT_1,$$
+$$P_2v_2=n_2RT_2.$$
+If we rearrange this, we obtain 
+$$v_2  = v_1\frac{P_1}{P_2}\frac{T_2}{T_1}\frac{Z_2}{Z_1}.$$
+If we choose the second condition to be ``standard" condition such that $T_0 = 0^{\circ}C$, $Z_0 = 1.0$, and $P_0 = 1atm$, then 
+$$v_0  = v_1\frac{P_1}{P_0}\frac{T_0}{T_1}\frac{1}{Z_1},$$
+where $v_1$ is the volume at $T_1$ and $P_1$, and $v_0$ is the volume of gas expressed at standard conditions. 
+	
+	
+\subsection{Reduced Conditions}
+These are dimensionless, reduced conditions. $P_r$, $T_r$, an $V_r$ denote the reduced pressure, the reduced temperature, and the reduced molar volume respectively:
+$$P_r = \frac{P}{P_C},$$
+$$T_r = \frac{T}{T_C},$$	
+$$V_r = \frac{V}{V_C}.$$
+All gases behave in a similar manner at the same reduced conditions. For two gases, if two of the three reduced properties are equal, then the value of the third property should be comparable. This is referred to as the \textbf{Law of Corresponding States}. We generally calculate $V_r$ as a function of the other two parameters. Furthermore, this function is the same for all gases. 
+
+For example, we substitute $P  = P_rP_C$, $T = T_rT_C$, and $V = V_rV_C$ into $$P = \frac{RT}{V-b}-\frac{a}{V^2}.$$ Since $$\frac{P_CV_C}{RT_C} = Z_C = \frac{3}{8},$$
+we find that 
+$$P_r = \frac{8T_r}{3V_r-1}-\frac{3}{V_r^2}.$$	
+We note that there are no $a$ and $b$ parameters, so this is a universal equation. 
+
+To find $Z$, we can use either the Generalized Compressibility Chart or Acentricity ($\omega$) as the Third Parameter. We note that these two methods along with VdW EOS are used to determine $V_m$. 
+\begin{enumerate}
+	\item \textbf{Generalized Compressibility Chart} is a graphical representation of the PVT behaviour for all gases. To use this, we first obtain the $T_C$ and $P_C$ of a particular gas. We then calculate $T_r$ and $P_r$ from the temperature and pressure. We then read $Z$ from the chart. Thus,
+$$V_m = \frac{ZRT}{P}.$$
+We generally need an additional parameter since charts are often not that accurate. We use $Z_C$ as the third generalization parameter (while $T_r$ and $P_r$ are the first two parameters) where 
+$$Z_C = \frac{P_CV_C}{RT_C}.$$
+This $Z_C$ ranges from $0.22 < Z_C <0.31$. For most gases, $0.26 < Z_C < 0.29$. We have a Generalized Compressibility Chart for $Z_C = 0.27$. 
+	\item \textbf{Acentricity ($\omega$) as Third Parameter} is the shape of molecules. $\omega \approx 0$ for simple gases. The equation to calculate $Z$ using $\omega$ was created by Pitzer and Curl, and is given as 
+	$$Z = Z^{(0)}(T_r,P_r)+\omega Z^{(1)}(T_r,P_r),$$
+	where the values of the functions $Z^{(0)}$ and $Z^{(1)}$ are given in tables. We can then solve 
+	$$PV_m = ZRT.$$
+\end{enumerate}
+	
+
+\section{March 7, 2017}
+\subsection{Real Gas Mixtures}
+
+We recall that using the VdW EOS, we could solve for $P$ and $V_m$ using $a$ and $b$. For $Z$, we could use the charts or the tables. For both methods of calculating $Z$, we use $PV_m=ZRT$. While these equations work for real gases, we now consider real gas mixtures. These gas mixtures will have properties different from individual components. We have the following three methods: 
+\begin{enumerate}
+	\item \textbf{Pseudocritical Point Method} is associated with $Z$. Here, we combine the critical values for the components in the mixture to determine an average $T_C$, $P_C$. This represents the mixture as one pseudo-component. In particular, this is also referred to as \textbf{Kay's Method}. Here, we calculate the pseudocritical pressure $P_{PC}$ as 
+	$$P_{PC} = \sum y_iP_{cy},$$
+	where $y_i$ is the mole fraction and $P_{ci}$ is the individual critical pressure. Similarly,
+	$$T_{PC} = \sum y_iT_{ci},$$
+	where $y_i$ is the mole fraction and $T_{ci}$ is the individual critical temperature.  Thus,
+	$$T_r = \frac{T}{T_{PC}},$$
+	$$P_r = \frac{P}{R_{PC}},$$
+	where $T$ and $P$ are the actual conditions of the gas. Once we have the pseudocritical properties, we can find the $Z$ associated through $PV_m = ZRT$ through the charts. If we are using the Pitzer-Curl Tables, then we identify the value according to the calculated $P_r$ and $T_r$ to solve the equation 
+	$$Z = Z^0 + \overline{\omega}Z^1,$$
+	where $$\overline{\omega} = \sum y_i\omega_i,$$
+	where $y_i$ is the mole fraction and $\omega_i$ is the individual accentricity factor. Then,
+	$$V_m = \frac{ZRT}{P}.$$
+	
+	\item \textbf{Mixing Rules Method} is associated with VdW EOS. We have the $a$ and $b$ values which are unique for each gas. We have to calculate $a$ and $b$ for the mix. For mixtures, we have 
+	$$a_m =  \left(\sum y_i\sqrt{a_i}\right)^2,$$
+	$$b_m = \sum y_ib_i.$$
+	For both of these, we should employ a table to organize the data.
+	\item \textbf{Applying Dalton's and Amagat's Laws}. This is not studied in this course. 
+\end{enumerate}
+	
+	
+\section{March 9, 2017}
+\subsection{Volumetric Behaviour of Liquids}
+
+We consider PVT relationships. For liquids, we usually keep one variable constant and look at the other two. Liquids resist compression but are not incompressible. 
+
+Pressure has an effect on volume when temperature is constant. \textbf{Isothermal compressibility} is defined as 
+$$\beta_T = -\frac{1}{V}\left(\frac{\partial V}{\partial P}\right)_T \approx -\frac{1}{V}\left(\frac{\Delta V}{\Delta P}\right)_T,$$
+where the negative sign is due to volume decreasing when pressure increases. This is approximated by 
+$$\beta_T \approx -\frac{1}{V}\left(\frac{\Delta V}{\Delta P}\right)_T = -\frac{\Delta V/V}{\Delta P}.$$
+The units of $\beta_T$ are $P^{-1}$, where $P$ is any unit of pressure. Isothermal compressibility is the fractional change in volume per unit change in the pressure at a constant temperature. $\beta_T$ can be determined from a table listing different substances at a certain temperature. For a certain liquid at a certain temperature, there are usually two values of $B_T$, one for high pressure and another for low pressure. As temperature increases, the $\beta_T$ value increases as well. 
+
+\begin{example}
+Given that $\beta_T = 11.32\cdot 10^{-10}1/Pa$, determine the fractional volume change if the pressure changes from $1at$ to $2atm$. 
+\end{example} 
+
+We note that $\beta_T = 1.147\cdot 10^{-4}atm$. Thus, since the pressure change is $1atm$, the fractional change in volume is $-0.0001147$. 
+
+Temperature has an effect on volume when pressure is constant. The \textbf{isobaric coefficient of volume expansion} is given as 
+$$\alpha_P = \frac{1}{V} \left(\frac{\partial V}{\partial T}\right)_P \approx  \left(\frac{\Delta V/V}{\Delta T}\right)_P,$$
+assuming that $\alpha_P$ is constant. Here, $\Delta V = V_T-V_{T0}$, while $\Delta T = T-T_0$. Substituting into the formula and solving for $V_T$, we obtain 
+$$V_T = V_{T0}(1+\alpha_P(T-T_0)).$$
+In the above expression for $V_T$, we need $\alpha_P$ and a reference volume $V_{T0}$ at a reference temperature $T_0$. The unit of $\alpha_P$ is $1/K$. 
+
+Temperature has an effect on pressure when volume is constant. The \textbf{pressure coefficient} is given as 
+$$\gamma_V = \frac{1}{P}\left(\frac{\partial P}{\partial T}\right)_V \approx \left(\frac{\Delta P/P}{\Delta T}\right)_V,$$where pressure rises as temperature rises. The units of $\gamma_V$ are $1/K$. We can relate all three coefficients by 
+$$\gamma_V = \frac{\alpha_P}{P\beta_T}.$$
+
+Now, we need to get working equations to be able to obtain $V$ at any temperature and pressure. 
+
+\subsection{Thermal Expansion of Liquids}
+The use of $\alpha_P$ is limited to actually calculate $V$. More often, we use 
+$$V_T = V_{T0}(1+A\theta + B\theta^2 + C\theta^3),$$
+where $\theta = T-T_0$. Note that this formula only takes into account temperature. We need $V_{T0}$ at $T_0$ and $A$, $B$, and $C$. These values can be obtained from a table, where the reference volume starts at $0^{\circ}C$ and $1atm$. $A$, $B$, and $C$ are used to determine $V_T$ at any $T$ at $1atm$. 
+
+Now, we consider the effect of pressure. \textbf{Tait's Equation} relates how $\beta_T$ changes with pressure and is given by 
+$$\beta_T = \frac{c}{P+d},$$
+where $c$ and $d$ are constants. This can be combined with the definition of $\beta_T$ to obtain 
+$$-\frac{1}{V}\left(\frac{\partial V}{\partial P}\right)_T = \frac{c}{P+d}.$$
+At a constant temperature, we can isolate the terms of volume from the terms of pressure and integrate both sides,
+$$-\ln(V) = c\ln(P+d)+C_1.$$
+We can define $V_0$ at $P = 0$ to be $V = V_0$. The formula then becomes 
+$$-\ln(V_0)=c\ln(d) + C_1.$$
+Subtracting these two equations, we obtain 
+\begin{align*}
+	-\ln\left(\frac{V}{V_0}\right)
+	&= -\ln\left(\frac{V_0+\Delta V}{V_0}\right)\\
+	&= -\ln\left(1+\frac{\Delta V}{V_0}\right)\\
+	&\approx -\frac{\Delta V}{V_0}\\
+	&= -\frac{V-V_0}{V_0}\\
+	&= \frac{V_0-V}{V_0}\\
+	\frac{V_0-V}{V_0}&= c\ln\left(\frac{P+d}{d}\right)
+\end{align*}
+This is the EOS for liquids at constant temperature. We need $V_0$ at $T$, along with $c$ and $d$ to utilize this formula. To obtain $c$ and $d$, we have $\beta_1$ and $\beta_2$ at pressures of $P_1$ an d$P_2$ respectively at a given $T$. From the table, we use $P_1$ an d$P_2$ to be the two different pressures. Thus, 
+we solve the following system 
+$$\beta_1 = \frac{c}{P_1+d},$$
+$$\beta_2= \frac{c}{P_2+d}.$$
+Solving this, we obtain $$d = \frac{P_1\beta_1 -P_2\beta_2}{\beta_2-\beta_1},$$
+$$c = \beta_1(P_1+d),$$
+$$c = \beta_2(P_2+d),$$
+where $c$ can be obtained from either expression. Since the pressure from the table is in $atm$ and $\beta_T$ is in units of $Pa^{-1}$, we need to convert $P$  from table to $Pa$, or convert $\beta$ to units of $atm^{-1}$. 
+
+To calculate $V$ for a liquid $X$ at temperature $T$ and pressure $P$, we follow the procedure below:
+\begin{enumerate}
+	\item We find $V_{T0}$ at a low pressure $P_0$ and low temperature $T_0$ using a table. We correct for $T$ using $V_T= V_{T0}(1+A\theta + B\theta^2+C\theta^3)$. 
+	\item We must first obtain $c$ and $d$ at $T$ from $P_1$, $P_2$, $\beta_1$ and $\beta_2$ from the table using the relationships $c = \beta_1(P_1+d)$ and $d = \frac{P_1\beta_1-P_2\beta_2}{\beta_2-\beta_1}$.
+	\item Now, we find $V_T$ at a low pressure $P_0$ and the correct temperature $T$. We correct for $P$ using $\frac{V_0-V}{V_0} = c\ln\left(\frac{P+d}{d}\right)$. 
+	\item We obtain $V$ at the correct pressure $P$ and correct temperature $T$. 
+\end{enumerate}
+This method (Tait's Law) is the first method to obtain the volume of the liquid.
+The VdW EOS is the second method to obtain the volume of the liquid, using a guess from the third method. Specifically, we use $V_m = 0.1V_{m(ideal)}$. This last method is from Corresponding States using the Z-chart, where we obtain $Z_L$ and $Z_V$ ($Z_V$ is on top, while $Z_L$ is on the bottom) for the Z value of liquid and vapour when $T_r<1$ and $P_r<1$ using a table. We then relate $PV_m = ZRT$. 
+
+
+
+\section{March 14, 2017}
+\subsection{Energy Effects in Liquid}
+
+Adding energy to liquids can result in two main effects: an increase in temperature (if $P > P_V$) or a phase change from liquid to vapour (if $P = P_V$). These are known respectively as sensible or specific heat, and latent heat. 
+
+\textbf{Heat capacity} $C_p$ is the energy required to raise the temperature of one kilogram or one mole by one degree Kelvin. This definition is the same for liquids, as it is for gases and vapours. The units are either mass heat capacity $J/(kg\cdot K)$, or molar heat capacity $J/(kmol\cdot K)$. Typical values for liquids are between $0.5-4.0 kJ/(kg\cdot K)$. Energy is therefore
+$$E = nC_p\Delta T,$$
+$$E=mC_p\Delta T,$$
+where $m$ is the mass and $n$ is the number of moles. 
+
+We can add heat and energy to a liquid at its vapour pressure. Some of the liquid will convert into vapour while the temperature remains constant. 
+\textbf{Latent Heat of Vaporization}, denoted by $\Delta H_v$ or $\lambda$, is the energy that is added. Latent heat is a function of temperature and pressure. We can consider a PV diagram as the LV region diminishes as $P$ and $T$ increase to the critical point. Thus, $\Delta H_v$ approaches 0 as $T$ approaches $T_C$. An estimate of $\Delta H_v$ can be obtained using \textbf{Trouton's Rule}, where 
+$$\frac{\Delta H_v}{T_b} \approx 88\frac{kJ}{kmol\cdot K},$$
+where $T_b$ is the normal boiling point at $1 atm$ of pressure. 
+
+Consider the heating of a liquid to convert it to a vapour. We start with a liquid below the bubble point and heat until we obtain a vapour above the dew point. Plotting a Temperature and Energy graph, we note that the temperature increases until we reach the boiling point temperature. A horizontal line appears in the L+V region until we are only left with vapour. The temperature of the vapour increases as more energy is added. 
+	\begin{enumerate}
+		\item In the liquid region, the liquid experiences sensible heat. Thus, 
+		$$\Delta E = C_{p_b} (T_b-T_0).$$
+		\item  Latent heat is associated with the region where liquid and vapour exist during the boiling. In this region,
+		$$\Delta E = \Delta H_v.$$
+		\item Sensible heat is experienced again when the vapour alone is being heated,
+		$$\Delta E = C_{p_V}(T_1-T_b).$$
+	\end{enumerate}
+Thus, the total energy is 
+$$E = C_{p_b} (T_b-T_0)+\Delta H_v + C_{p_V}(T_1-T_b),$$
+expressed per mole or per kilogram. We need to multiply by $n$ or $m$ in moles and kilograms respectively to get $kJ$. It is therefore necessary to draw the temperature profile, since not all problems require all three steps. 
+
+\subsection{Calculating $\Delta H_v$}
+We can calculate $\Delta H_v$ from $T$ and $P$ and vice versa by applying the \textbf{Clausius-Clapegron Equation} which relates $\Delta H_v$ to the slope of the vapour pressure curve. That is,
+$$\frac{\mathrm d P}{\mathrm d T} = \frac{\Delta H_v}{T(V_g-V_l)},$$
+where $P$ is the vapour pressure, $T$ is the boiling temperature, $V_g$ is the specific volume of vapour, $V_l$ is the specific volume of liquid in equilibrium at $T$, and $\Delta H_v$ is the latent heat of vaporization. This can be approximated with
+$$\frac{\Delta P}{\Delta T} = \frac{\Delta H_v}{T(V_g-V_l)},$$
+where a table may be used to determine the value for $\Delta H_v$. Thus, to obtain $\Delta H_v$ at $T_2$, we use one point above and below this on the table to find that 
+$$\frac{\Delta P}{\Delta T} = \frac{P_3-P_1}{T_3-T_1} = \frac{\Delta H_v}{T_2(V_{g2}-V_{l2})}.$$
+Similar equations can be applied to fusion/melting and sublimation/deposition since
+$$\frac{\mathrm d P}{\mathrm d T} = \frac{\Delta H_f}{T(V_l-V_s)},$$
+$$\frac{\mathrm d P}{\mathrm d T} = \frac{\Delta H_s}{T(V_g-V_s)}.$$
+
+
+\subsection{Correlating Vapour Pressure Data to Obtain $\Delta H_v$}
+We assume the following:
+\begin{enumerate}
+	\item Pressure is low, so we can use ideal gas for $V_g$, so 
+	$$V_g = \frac{RT}{P}.$$
+	\item $V_g >> V_l$ if $T << T_C$. Thus, 
+	$$V_g-V_l \approx V_g.$$
+\end{enumerate}
+Combining these equations with the Clausius-Clapegron equation, we obtain 
+\begin{align*}
+	\frac{\mathrm d P}{\mathrm d T} & = \frac{\Delta H_v}{T(V_g-V_l)}\\
+	&= \frac{\Delta H_v}{TV_g}\\
+	&= \frac{\Delta H_v}{T\frac{RT}{P}}\\
+	&= \frac{\Delta H_v}{RT^2}P\\
+	\frac{\mathrm d P}{P} &= \frac{\Delta H_v}{RT^2}\mathrm d T\\
+\end{align*}
+Integrating both sides and assuming that $\Delta H_v$ is constant, we obtain 
+$$\ln(P) = -\frac{\Delta H_v}{R}\frac{1}{T} + C.$$
+Since we know that $P_1$ is the pressure at $T_1$ and $P_2$ is the pressure at $T_2$, We can substitute these values into the above equation, and find the difference between the equations to obtain 
+$$\ln\left(\frac{P_1}{P_2}\right) = \frac{\Delta H}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right).$$
+We note that this could be used to obtain $\Delta H_v$ given two temperatures and pressures, or it could be used to solve for any other variable given the other four. That is, we can use this equation to obtain the boiling point at any pressure, or the vapour pressure at any temperature.
+\begin{remark}
+	$\Delta H_v$ requires units in kiloJoules/kilomole, $T$ requires units in Kelvin, and $R$ is $8.314\frac{kJ}{kmolK}$ in the above equation.
+	
+	The above equation assumes that $\Delta H_v$ is constant. If instead, $\Delta H_v = A + BT$ assuming a linear relationship, then 
+\begin{align*}
+	\frac{\mathrm d P}{\mathrm d T} &= \frac{\Delta H_v}{RT^2}P\\
+	&= \frac{A+BT}{RT^2}P\\
+	\ln(P) &= -\frac{A}{RT}+B\ln(T)+C
+\end{align*}
+If the ideal gas assumption for $V_g$ is not valid, then 
+$$\ln(P) = \frac{C_1}{T} + C_2,$$
+where $C_1$ and $C_2$ are obtained from $P_1$, $T_1$, $P_2$, and $T_2$. If $T_1$ and $T_2$ are close together, then we can assume that 
+$$C_1 = -\frac{\Delta H_v}{R}.$$
+\end{remark}
+
+
+
+
+
+
+
+\section{March 16, 2017}
+\subsection{Summary}
+We want to relate the vapour pressure $P_V$ to the boiling temperature $T$ using $\Delta H_v$. We have the following three equations that relate he vapour pressure to temperature:
+\begin{enumerate}
+	\item The most accurate method to relate vapour pressure with boiling temperature is with the following equation,$$\frac{\mathrm d P}{\mathrm d T} = \frac{\Delta H_v}{T(V_g-V_l)}.$$ However, we need $V_g$ and $V_l$, which are not always given. 
+	\item We may assume ideal gas to arrive at the second equation. That is, at low pressures, we can express this as 
+	$$\ln\left(\frac{P_1}{P_2}\right) = \frac{\Delta H}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right).$$
+	\item At higher pressures where we cannot assume ideal gas, we use $$\ln(P) = \frac{C_1}{T} + C_2.$$ We use $C_1 = -\frac{\Delta H_v}{R}$ to estimate $\Delta H_v$. 
+\end{enumerate}
+For the second and third method, we are either given two boiling points, or one boiling point and latent heat. 
+
+\subsection{Equilibrium Pressure Above Liquid Mixtures}
+
+At a certain temperature, we have a certain mole fraction of the substance in vapour $y_i$, and a certain mole fraction of the substance in liquid $x_i$. We can relate the liquid and vapour compositions as 
+$$\overline{P_i} = C_ix_i,$$
+where $\overline{P_i}$ is the partial pressure in the vapour, $C_i$ is the constant that changes with temperature, and $x_i$ is the mole fraction that is liquid. \textbf{Raoult's law} states that for molecules with similar shapes, the partial pressure in the vapour is 
+$$\overline{P_i} = P_{V_i}x_i = y_iP,$$
+where $P_{V_i}$ is the vapour pressure at the temperature of the mixture. We note that for a liquid with $C$ components in equilibrium with a vapour, we have $C-1$ degrees of freedom used up. This, $F=1$, but $T$ is known, so we have $F=0$ degrees of freedom. Since $F=0$, there is a unique point-pressure that depends on $T$ and the composition of the liquid. The unique pressure is the bubble point pressure of that mixture at the specific temperature $T$. We can calculate this pressure. 
+
+Suppose we are given the liquid composition in terms of $x_1, x_2, ..., x_C$ at a particular temperature. We want to find $P$ and $y_i$. We will use Raoult's law $P_{V_i}x_i = Py_i = \overline{P_i}$ along with the fact that
+$\sum y_i = 1$. Equating these two expressions, we obtain 
+$$P = P_{V_1}{x_1} + P_{V_2}{x_2} + ... + P_{V_C}{x_C}  .$$
+However, this means that we need $P_{V_1}$ and the rest of the vapour pressures at the temperature of the mixture. We can either use a table or calculate these using the methods discussed in the previous class. This allows us to use Raoult's law to calculate the mole fractions in the vapour $y_i$ since we now know $P$. .
+
+Suppose we are given the vapour composition at a fixed temperature. We want to find $P$ and $x_i$. We use Raoult's law to relate $P_{V_i}x_i = Py_i $ with $\sum x_i = 1$. Equating these expressions, we find that 
+$$P = \left(\frac{y_1}{P_{V_1}} + \frac{y_2}{P_{V_2}} + ... + \frac{y_C}{P_{V_C}}\right)^{-1}.$$
+We need $P_{V_1}$ and the rest of the vapour pressures at the temperature of the mixture. We can also obtain the liquid composition $x_i$ from substituting known values back into Raoult's law. 
+
+When we do not have similar molecules, we can use a different temperature dependent constant. \textbf{Henry's law} states that for molecules with different shapes, the partial pressure of the gas dissolved in the liquid is $$\overline{P_i} = H_ix_i.$$
+
+For binary mixtures, we have compositions $x_1$, $x_2$, $y_1$ and $y_2$. The total pressure is therefore 
+$$P = P_{V_1}x_1 + P_{V_2}x_2.$$
+Each $P_{V_1}$ and $P_{V_2}$ is evaluated at $T$ of the mixture. We define the \textbf{relative volatility} $\alpha_{21}$ as
+$$\alpha_{21} = \frac{P_{V_2}}{P_{V_1}}.$$
+Then, we can determine the vapour composition,
+$$y_1 = \frac{\overline{P_1}}{P} = \frac{P_{V_1}x_1}{P_{V_1}x_1 + P_{V_2}x_2} = \frac{x_1}{x_1+ \frac{P_{V_2}}{P_{V_1}}x_2} = \frac{x_1}{x_1\alpha_{21}(1-x_1)}.$$
+Thus, if we have two components, we can first fix the temperature, then obtain $P_{V_1}$ and $P_{V_2}$ at the specified temperature, where $\alpha_{21} = \frac{P_{V_2}}{P_{V_1}}$. We can then pick different $x_i$ values to calculate different $y_i$ using the formula above and $P$ using 
+$$P = P_{V_1}x_1 + P_{V_2}(1-x_1).$$ This can be used to form a Px diagram where we plot $P$ against $x_1y_1$. The vapour phase would be on the bottom, the LV region would be in the middle, and $L$ would be on the top. The $x_1$ value would be read on the left of the horizontal, while $y_i$ would be read on the right of the horizontal. 
+
+\begin{example}
+The liquid mixture is composed of $20kg$ of n-hexane ($M = 86$), and $80kg$ of n-octane ($M=114$). For each 
+
+Calculate the mole fractions. Determine $T_3$ at a pressure of $P_3 = 200mmHg$. 
+\end{example}
+
+The moles of n-hexane is $0.2326kmol$, while the moles of n-octane is $0.7018kmol$. Letting n-hexane be the first substance, we have $x_1 = 0.25$, while $x_2 = 0.75$. We now find 
+\begin{align*}
+	\ln\left(\frac{P_2}{P_1}\right) &= \frac{\Delta H_v}{R}\left(\frac{1}{T_1}-\frac{1}{T_2}\right)\\
+	\ln\left(\frac{351.1}{50.3}\right) &= \frac{\Delta H_v}{R}\left(\frac{1}{323.15}-\frac{1}{373.15}\right)\\
+	\frac{\Delta H_v}{8.314} &= 4686K\\
+	\Delta H_v &= 38959\frac{kJ}{kmol}
+\end{align*}
+Thus, the $\Delta H_v$ in terms of n-octane is $$\Delta H_v = \frac{38959kJ/kmol}{114kg/kmol} = 341.7\frac{kJ}{kg}.$$
+We then apply $\ln\left(\frac{P_2}{P_1}\right) = \frac{\Delta H_v}{R}\left(\frac{1}{T_1}-\frac{1}{T_2}\right)$ to find that the temperature $T_3= 84^{\circ}C$. 
+
+\section{March 21, 2017}
+\subsection{Stress and Strain in Fluids}
+
+In mechanical equilibrium, the net force must be zero. A stationary fluid must exert a force equal in magnitude and opposite in direction to any external force. In the presence of an external force, the fluid is under normal and shear stress. 
+
+\textbf{Normal stress} ($\sigma$) is distributed uniformly throughout the fluid and acts in an outward direction normal $\left(90^{\circ}\right)$ to all surfaces the fluid is in contact with, 
+$$\sigma = -P,$$
+where $P$ is the pressure given as force $F$ divided by area $A$. We note that the normal stress is the negative of the applied pressure. This will result in a change in volume $(\Delta V)$. The fractional change in volume is 
+$$\frac{\Delta V}{V}.$$
+For a cylindrical piston, where the volume is changed only by varying the height $L$, the fractional change in volume is given by 
+$$\frac{\Delta L}{L},$$
+where this is the \textbf{normal strain}. 
+
+\textbf{Shear stress} ($\tau$) is the stress that is exerted along the surface of the fluid (not normal to the fluid). The fluid offers resistance to the deformation (different than simple compression). Shear stress is transmitted through imaginary layers of the fluid, 
+$$\tau = \frac{F}{A}.$$
+\textbf{Shear strain} is given as 
+$$\frac{\mathrm d x}{\mathrm d y} = \frac{\Delta x}{\Delta y},$$
+where $\Delta x$ is the horizontal change caused by the force, and $\Delta y$ is the vertical distance from the bottom of the liquid. For an elastic material (like a solid), $\tau$ is proportional to shear strain. In fluids however, the presence of $\tau$ results in shear strain. But when $\tau$ is removed, the strain is not removed automatically. That is, it results in the movement of the fluid. Generally, we only see $\tau$ when we movement in the fluid. Usually, $\tau$ is dependent on the rate of strain. Thus, 
+$$\tau = C\frac{\mathrm d u}{\mathrm d y},$$
+where $u$ is the velocity in the direction of the applied force, $y$ is in the direction normal to the applied force, and $C$ is a constant. $C$ can be $0$, a constant, or not constant. 
+
+\begin{remark}So far, we have only looked at $\tau$ in one direction and $x$ in one direction. However, strain can be in all three directions, and the same can be said of stress. With nine components of shear stress and strain, we need tensor calculus to evaluate this. In this course, we will look at simple equations in one direction each only. 
+\end{remark}
+
+An \textbf{ideal fluid} is an imaginary (hypothetical) fluid for which $C=0$ in $\tau = C\frac{\mathrm d u}{\mathrm d y}$, there is no shear strain as a result of external stress. Or, if there was a velocity gradient, this will not result in stress. These fluids are also known as frictionless, perfect, or inviscid. The flow pattern is called \textbf{potential} or \textbf{ideal} flow. 
+	
+A \textbf{Newtonian fluid} occurs when $C$ is a constant but not $0$. This becomes 
+$$\tau = -\mu\frac{\mathrm d u}{\mathrm d y},$$
+where $C = -\mu$. We recall that $\mu$ is called the \textbf{viscosity} or \textbf{dynamic viscosity}. The units of $\mu$ are $Pa\cdot s$. \textbf{Kinematic viscosity} is given as 
+$$\nu = \frac{\mu}{\rho},$$
+where $\mu$ is the dynamic viscosity and $\rho$ is the density. The units of $\nu$ are $m^2/s$. We note that a change in $\frac{\mathrm d u}{\mathrm d y}$ will not result in a change in $\mu$, as we instead see a change in $\tau$. We can now describe the effect of temperature and pressure on viscosity. For a gas, as $\mu$ increases, $T$ increases. For liquids, as $\mu$ decreases, $T$ increases. This is given by 
+$$\log_{10}(\mu) = \frac{A}{T} + B.$$
+The effect of $T$ is much greater than that of $P$. Generally for liquids, as $\mu$ increases, $P$ increases. 
+
+A \textbf{Non-Newtonian fluid} occurs when $\tau$ is not directly proportional to $\frac{\mathrm d u}{\mathrm d y}$. Generally, $\tau$ is also dependent on time. The apparent viscosity for non-Newtonian fluids is given as 
+$$\mu_{APP} = -\frac{\tau}{\frac{\mathrm d u}{\mathrm d y}},$$
+where the ratio is not constant. That is, $\mu_{APP}$ is a function of the rate of strain. The formula is the same, but $\mu_{APP}$ is not constant. It can change with shear history, shear rate, and shear stress. We can have multiple types of Non-Newtonian fluids. 
+
+\subsection{Non-Newtonian Fluids}
+A \textbf{thixotropic fluid} has a $\mu_{APP}$ that decreases over time to reach some final value. This includes slurries such as Bentonite slurries. A \textbf{rheopectic fluid} is one with a $\mu_{APP}$ that increases over time to reach some final value. This is rare, and only occurs in some forms of inks. A \textbf{viscoelastic fluid} exhibits ``rubber-like" properties, such as stretching under shear. These have partial elastic recovery when shear is removed. This includes oils, polymers, and blood. \section{March 23, 2017}
+\subsection{Non-Newtonian Fluids Cont'd}
+	
+	A \textbf{power-law fluid} has shear stress that is only a function of shear rate (not time). We use the \textbf{Ostwald-de-Waele model} to describe this phenomenon, which states that 
+	$$\tau = K\left(\frac{\mathrm d u}{\mathrm d y}\right)^n,$$
+	where $K$ is the fluid consistency index, and $n$ is the fluid behaviour index. When $n=1$, we have a Newtonian-fluid. Thus, when $n\neq 1$, we have a Non-Newtonian fluid. Note that $n$ is dimensionless, but affects the dimensions of $K$, which are $Pa\cdot s^n$. Thus, the apparent viscosity is 
+$$\mu_{APP} = \frac{K \left(\frac{\mathrm d u}{\mathrm d y}\right)^n}{\frac{\mathrm d u}{\mathrm d y}} = K\left(\frac{\mathrm d u}{\mathrm d y}\right)^{n-1}.$$ 
+
+When $n>1.0$, we have \textbf{dilatent power-law fluids} where $\mu_{APP}$ increases with $\frac{\mathrm d u}{\mathrm d y}$. This includes substances such as starch suspensions. 
+When $n<1.0$, we have \textbf{pseudoplastic power-law fluids} where $\mu_{APP}$ decreases with $\frac{\mathrm d u}{\mathrm d y}$. To obtain the values of $K$ and $n$, we plot the logarithm of both sides,
+$$\log(\tau) = \log(K) + n\log\left(\frac{\mathrm d u}{\mathrm d y}\right).$$
+It is important to include the units of $K$ after the calculation to determine the value is obtained. 
+
+Another Non-Newtonian fluid is a \textbf{Bingham Plastic Fluid}, which is characterized by its solid-like behaviour at low shear stress. The flow when  $\tau$ is greater than some value $\tau_0$ can be given as 
+$$\tau = \tau_0-\mu_0\left(\frac{\mathrm d u}{\mathrm d y}\right) \implies \tau \geq \tau_0,$$
+$$\frac{\mathrm d u}{\mathrm d y} = 0 \implies \tau < \tau_0.$$
+	
+If these are plotted on a graph of $\tau$ and $\frac{\mathrm d u}{\mathrm d y}$, then the slope of a Newtonian fluid is constant from the bottom left corner. Dilatent fluids start from the corner and slope upwards, while pseudoplastic fluids slope downwards from the corner. Bingham plastic fluids have a y-intercept at $\tau_0$ before they rise at a constant slope. 
+	
+\textbf{Measurement of Viscosity}
+Viscosity cannot be measured directly, so we measure shear stress at specific rates of strain. This is done by using viscometers. We can distinguish the procedure between low and high viscosities:
+\begin{enumerate}
+	\item For low viscosities we can use the \textbf{Capillary Tube Viscometer} (\textbf{Cannon-Fenske}), we measure the pressure drop across a small diameter tube at a fixed flow rate. This is given by 
+	$$\mu = \frac{\pi(-\Delta P)D^4}{128QL},$$
+	where $Q$ is the flow rate, $L$ is the length, $D$ is the diameter, and $\Delta P$ is the pressure drop. 
+	
+	Alternatively, we may use the \textbf{Saybolt Viscometer}, where the fluid is allowed to drain through a narrow (capillary) tube. The time for a fixed volume is measured. This is given by 
+	$$\nu = \frac{\mu}{\rho} = At-\frac{B}{t},$$
+	where $A$ and $B$ are constants, $t$ is time, and $\nu$ is the kinematic viscosity. 
+	\item For high viscosities, we may use the \textbf{Spherical Ball Viscometer}, where a sperical steel ball is allowed to fall through a column of fluid. The time over a fixed distance is used to calculate the terminal velocity ($v_t$). The viscosity is given as 
+	$$\mu = \frac{2R^2(\rho_S-\rho_L)g}{9v_t},$$
+	where $R$ is the radius of the sphere, $\rho_S$ is the density of the steel, $\rho_L$ is the density of the fluid, and $g = 9.81m/s^2$. We can also use a \textbf{Fann Viscometer} which is a co-axial concentric cylinder viscometer. The inner cylinder is rotated at a constant revolutions per minute. This generates a torque on the outer cylinder through the fluid. The viscosity is given as 
+	$$\mu = \frac{\Gamma}{k_0\Omega},$$
+	where $\Gamma$ is the torque, $\Omega$ is the angular velocity, and $k_0$ is a constant. 
+\end{enumerate}
+	
+\subsection{Flow of Fluids}
+Different equations govern different types of fluids. For ideal fluids, we have the following:
+\begin{itemize}
+	\item \textbf{Potential Flow} is ideal flow where there are no shear forces. All fluids obey some of the same rules. Some of these rules include the conservation of mass, the conservation of momentum, and the conservation of energy. Conservation of energy may be with regards to potential, kinetic, work, or pressure.
+	\item \textbf{Bernoulli's Equations} are also used for ideal fluids. The path followed by a particle or a packet of fluid in ideal flow is call a \textbf{pathline} or a \textbf{streamline}. These streamlines do not intersect, an no particles travel from one streamline to another. The fluid starts at a height of $h_1$ and ends at a height of $h_2$. Similarly defined are the different pressures $P_1$ and $P_2$, velocities $u_1$ and $u_2$, and densities $\rho_1$ and $\rho_2$. These flow across cross sectional areas of $A_1$ and $A_2$ at the beginning and end respectively. This imaginary tube is formed by streamlines under gravity flow. We can therefore perform an energy balance between the two locations, and perform a mass balance. Thus, 
+	$$\frac{P_1}{\rho_1} + \frac{u_1^2}{2} + h_1g = \frac{P_2}{\rho_2} + \frac{u_2^2}{2} + h_2g = C,$$ where $\frac{P}{\rho}$ is the displacement work term, $\frac{u^2}{2}$ is the kinetic energy term, $hg$ is the potential energy term, and $C$ is a constant. Since this is ideal flow, there is no $\mu$ in the equation. Thus, we need pressure, density, velocity, and height at any point to calculate the constant. 
+	
+	For the \textbf{flow through a variable area duct}, we can write a \textbf{Continuity Equation} (mass balance) to find that $$u_1A_1\rho_1 = u_2A_2\rho_2,$$
+	where the units of both sides are in kilograms per second. For a horizontal duct, $h_1=h_2$, so 
+	$$\frac{P_1}{\rho_1} + \frac{u_1^2}{2} = \frac{P_2}{\rho_2} + \frac{u_2^2}{2} .$$
+	Thus, equating $u_2$ in both of the equations, we obtain 
+	$$\frac{P_1}{\rho_1} + \frac{u_1^2}{2} = \frac{P_2}{\rho_2}+\frac{u_1^2}{2}\left(\frac{A_1\rho_1}{A_2\rho_2}\right).$$ Thus, we rearrange this to obtain 
+	$$\frac{P_1-P_2}{\rho} = \frac{u_1^2}{2}\left(-1+\frac{A_1^2}{A_2^2}\right).$$ The equivalent expression based on $u_2$ is 
+	$$\frac{P_1-P_2}{\rho} = \frac{u_2^2}{2}\left(1-\frac{A_2^2}{A_1^2}\right).$$
+	\begin{remark}If $P_1$ and $P_2$ are the same order of magnitude, then $\rho_1 = \rho_2 = \rho$ for liquids. 
+	\end{remark}
+	
+	For the \textbf{flow through a narrow opening} where $A_2 << A_1$, then using the above equation, we find that 
+	$$u_2 = \sqrt 2 \sqrt{\frac{\Delta P}{P}}.$$
+	For ideal fluid, we can get flow ($u_2$) from $\Delta P$. For real fluids, we also have friction, so 
+	$$u_2 = C_0\sqrt{\frac{\Delta P}{P}}.$$
+	
+	For \textbf{Hydrostatic Pressure} with a column of fluid, we know that $A_1=A_2$ and $\rho_1=\rho_2=\rho$. Thus, according to the continuity equation, $u_1 = u_2$. Thus, writing the Bernoulli equation, this is expressed as 
+	$$P_1-P_2 = \rho g(h_2-h_1).$$
+\end{itemize}
+	
+\section{March 28, 2017}
+\subsection{Laminar Flow} 
+
+In fluid mechanics, \textbf{laminar flow} indicates that fluid particles flow along streamlines. First, we consider a circular pipe of a constant cross sectional area. 
+We assume the following:
+\begin{itemize}	
+	\item The cross sectional area is constant, so $A_1 = A_2$. From the equation of continuity, $U$ is constant, so there is no acceleration of the fluid. 
+	\item The fluid is incompressible, so $\rho$ is a constant. 
+	\item The fluid is viscous. 
+\end{itemize}
+	
+Note that for a nonviscous ideal fluid flowing in a horizontal pipe, we have $U1 = U_2$, $h_1 = h_2$, and $P_1 = P_2$. Thus, the net pressure force is $(P_1-P_2)A = 0$. 
+
+Viscous fluids on the other hand, exert a resistance to the flow. They exert forces on any surface. We must apply external forces to keep the fluid in motion with a speed such that $u$ is constant. We note that there must be a pressure gradient. That is, $(P_1-P_2)A$ will balance the viscous force. 
+
+The volumetric flow rate $Q$ depends on the cross sectional area and the velocity since 
+$$Q = A\cdot u,$$
+where $u$ is the velocity. 
+	
+Consider the force acting on a disk shaped fluid element. The pressure force on the left of the face is given by 
+\begin{align*}
+	F &= P\cdot A\\
+	&= P \cdot \pi r^2
+\end{align*}
+On the right side, this is therefore 
+$$F = (P + \Delta P_\pi r^2.$$
+The viscous force on the rim of the disk is given by the area multiplied byy the shear stress, so it is 
+$$F_f = 2\pi r \Delta L \cdot \tau,$$
+where $L$ is the length of the pipe. By equating with the net force in the flow direction, we obtain 
+$$\frac{\Delta P}{\Delta L} = \frac{2 \tau}{r} = 0.$$
+At the wall, $r = r_w$ and $\tau = \tau_w$. Comparing the equation with these values substituted in, we obtain 
+$$\frac{\tau}{r} = \frac{\tau_w}{r_w}.$$
+This tells us that $\tau$ varies linearly with $r$. Thus, when $r=0$ at the center, $\tau=0$. When we move towards the outside with increasing $r$, then $\tau$ increases linearly. Substituting this for energy, we have 
+$$u = \frac{\tau_w}{2r_w \mu}\left(r_w^2-r^2\right).$$
+Thus, $u$ varies linearly with $r^2$. The maximum occurs when $r=0$. At the wall, we have $r=r_w$, so $u = 0$. 
+$Q$ also depends on $r$ and is given by 
+$$Q = \frac{u_{max}}{2}\pi r_w^2.$$
+We can practically define an average velocity as 
+$$\overline u = \frac{u_{max}}{2}.$$
+Referring back to the force balance, we find that 
+$$\Delta P = \left(-\frac{32 \mu \overline u}{D^2}\right)\Delta L.$$
+While we have derived the expressions for a horizontal pipe, these results are also true for an inclined pipe, where 
+$$\frac{\Delta P}{L} + \rho g\frac{\Delta h}{L} = -\frac{32 \mu \overline u}{D^2}.$$
+This is known as the \textbf{Hagen-Poiseville Equation}, where $L$ denotes the change in length $\Delta L$. 
+	
+	
+\section{March 30, 2017}
+\subsection{}
+
+\textbf{Reynold's Number} is given by 
+$$Re = \frac{D\overline u\rho}{\mu},$$
+where $D$ is the diameter in $m$, $\overline u$ is the velocity in $m/s$, $\rho$ is the density in $kg/m^3$, and $\mu$ is the viscosity in $Pa\cdot s$. Laminar flow occurs when $Re <2100$, and turbulent flow occurs when $Re>4500$. When $Re$ is between these two values, this is a transition region, so we use the turbulent equations. We will always use Reynold's number for flow questions. 	
+
+Recall that \textbf{laminar flow} is given by 
+$$-\left(\frac{\Delta P}{L} + \rho g \frac{\Delta H}{L}\right) = \frac{32\mu \overline u}{D^2},$$
+where $\Delta P = P_{out}-P_{in}$ in $Pa$, $\Delta h = h_{out}-h_{in}$ in $m$, $L$ is the length in $m$, $\overline u$ is the average velocity, and $D$ is the diameter. 
+	
+To solve flow problem, we first need to draw a diagram depicting the situation and then label as much as we can. We note that opposing sides of a pump are considered different locations, as they have different properties. Laminar flow equations can be used between any interconnecting pipes. That is, we cannot use it in the tanks containing the fluid, or at the pump. When considering the pressure differentials across tanks, we assume that the average velocity $\overline u$ is 0 for a sufficiently large tank. Thus, since $\overline u=0$, we manipulate the laminar flow equation to find 
+$$-(P_2-P_1)=\rho g(h_2-h_1).$$
+The end of the pipe is open to the atmosphere, so we assume that the pressure there is $1atm$. 
+	
+\subsection{Turbulent Flow in Pipes}
+The velocity at any radius in the pipe fluctuates. Recall that for laminar flow, we attain a smooth parabolic shape. For turbulent flow, the velocity drastically increases as we move from the outside to the center. That is, it reaches near maximum velocity only slightly in from the outside. Additionally, the velocity fluctuates so it looks jagged. It has a different velocity profile, since $$u = u_{max}\left(1-\frac{r}{r_w}\right)^{\frac{1}{7}},$$
+whereas we recall that the velocity profile for laminar flow was 
+$$u - u_{max}\left(1-\left(\frac{r}{r_w}\right)^2\right).$$
+We also make use a a \textbf{friction factor} that is used in turbulent flow. It is given by 
+$$f = \frac{\tau_w}{\left(\rho\overline u^2/2\right)} = \frac{2\tau_w}{\rho \overline u^2},$$
+where $f$ is the friction factor. Another friction factor that is used is the \textbf{Darcy friction factor} which is given by $$f_D = 4f.$$ We start with our equation for pipe flow, 
+$$\frac{\Delta P}{L} + \rho g \frac{\Delta H}{L} + \frac{2\tau_w}{r_w} = 0,$$
+where 
+$$\tau_w = \frac{f\rho\overline u^2}{2},$$
+$$r_w = \frac{D}{2}.$$
+Thus, the final equation that we use is 
+$$-\left(\frac{\Delta P}{L}+\rho g \frac{\Delta H}{L}\right) = \frac{2f\overline u^2\rho}{D}.$$
+
+By equating the right hand sides of turbulent and laminar flow, we find that the \textbf{laminar friction factor} is given by 
+$$f = \frac{16}{Re}.$$
+For turbulent flow, the relationship between $f$ and $Re$ is more complicated. The pipe roughness also affects $f$. We will make use of a \textbf{friction factor chart}. Note that we need average velocity to obtain $Re$ to find $f$ from the chart. If we do not know the average velocity $\overline u$, then we will use trial and error. That is, we estimate $f$, the calculate $\overline u$ from the turbulent flow equation. We then calculate $Re$ and use that number to look up $f_2$ from the chart. If $f_2\neq f$, then we repeat with $f_2$. 
+
+\subsection{Power Consumption}
+We need to add energy to the liquid to overcome losses. The power for a pump is 
+$$\text{Power} = Q\Delta P,$$
+where $\Delta P$ is the pressure across the pump, and $Q$ is the volumetric flow rate in $m^3/s$. We find the power after determining the pressures at its opposing ends by applying the flow equations. 
+
+\subsection{Problem Solving}
+Recall from the continuity equation that $\rho u A$ is generally a constant. Some common problems may be to determine $\overline u$ and flow from the geometry and pressure, or to determine the pressure or pump power from the geometry and $\overline u$. If we do not know $\overline u$, then we assume that it is turbulent. 
+
+
+\section{April 11, 2017}
+\subsection{Review for Final}
+
+The lever rule can be applied in two phase regions. 
+In two component systems, we find the composition of each phase according to going to the left and right until we hit the lines. Melting/Boiling points correspond to highest point where lines meet on the left and right in two component systems. The solubility of component 2 in 1 is at the right, while the reverse is true for component 1 in 2. Know how to interpolate and extrapolate data from tables. 
+
+In liquids, we also consider PVT relationships. We use equations to consider the effect of $T$ on $V$, and the effect of $P$ on $V$. Relating vapour pressure with temperature, we use 
+$$\ln(P_V) = -\frac{A}{T}+C,$$
+where we relate $P_V$, $\Delta H_V$, and $T$. To determine the pressure above a liquid mixture, we make use of Raoult's law since it relates properties in the vapour and liquid phase. 
+
+Movement in fluids are described by viscosity. Viscosity provided a means to classify fluids as ideal, Newtonian, and non-Newtonian. In ideal,, we use Bernoulli's equation. In Newtonian fluids, $\mu$ is a constant, while non-Newtonian fluids have a changing $\mu_{APP}$. Non-Newtonian fluids can be distinguished into many types. We mostly considered power law fluids. 
+
+We also considered the flow of fluids, but only for ideal and Newtonian fluids. For Newtonian fluids, we always have to calculate Reynold's number before applying Bernoulli's equation. We can therefore distinguish into laminar and turbulent flow., where eddies occur in turbulent flow. For turbulent flow, we additionally need to consider the friction factor. It is important to draw and label a diagram for fluid flow problems. When solving for $\Delta P$ or $\Delta h$, solve for the change first, then split into the final value subtract the initial value. The pump power is 
+$$\text{Power}= Q(P_1-P_0),$$
+where $Q$ is in $m^3/s$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+\end{document}
